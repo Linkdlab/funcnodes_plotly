@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 from plotly.basedatatypes import BaseTraceType
 import funcnodes as fn
 from exposedfunctionality.function_parser.types import add_type
+from . import plots, layout, figure, express
 
 add_type(
     go.Figure,
@@ -13,8 +14,10 @@ add_type(
     "plotly.Trace",
 )
 
-from .plots import make_scatter, make_bar
-from .figure import make_figue, add_trace, plot
+add_type(
+    Tuple[int, int, int],
+    "color",
+)
 
 
 FUNCNODES_RENDER_OPTIONS: fn.RenderOptions = {
@@ -34,17 +37,16 @@ fn.JSONEncoder.add_encoder(figureencoder)
 
 
 NODE_SHELF = fn.Shelf(
-    nodes=[
-        make_scatter,
-        make_bar,
-        make_figue,
-        add_trace,
-        plot,
-    ],
+    nodes=[],
     name="Plotly",
     description="A collection of functions for creating plotly plots.",
-    subshelves=[],
+    subshelves=[
+        plots.NODE_SHELF,
+        layout.NODE_SHELF,
+        figure.NODE_SHELF,
+        express.NODE_SHELF,
+    ],
 )
 
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"

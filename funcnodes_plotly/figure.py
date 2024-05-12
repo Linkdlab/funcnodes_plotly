@@ -66,3 +66,22 @@ def plot(figure: go.Figure) -> go.Figure:
         The figure object to be plotted.
     """
     return figure
+
+
+@fn.NodeDecorator(
+    "plotly.to_json",
+    name="To JSON",
+)
+def to_json(figure: go.Figure) -> Dict[str, Any]:
+    """
+    Convert a figure object to a JSON object.
+    """
+    return figure.to_plotly_json()
+
+
+NODE_SHELF = fn.Shelf(
+    nodes=[make_figue, add_trace, plot, to_json],
+    name="Figures",
+    description="Nodes for creating and manipulating plotly figures.",
+    subshelves=[],
+)
