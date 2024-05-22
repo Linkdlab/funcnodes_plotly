@@ -698,7 +698,7 @@ def scatter_matrix(
     if dimensions is not None:
         dimensions_list = [s.strip() for s in dimensions.split(",")]
     else:
-        dimensions_list = data.columns
+        dimensions_list = list(data.columns)
 
     if color is not None:
         if color in dimensions_list:
@@ -733,7 +733,7 @@ def parallel_coordinates(
     if dimensions is not None:
         dimensions_list = [s.strip() for s in dimensions.split(",")]
     else:
-        dimensions_list = data.columns
+        dimensions_list = list(data.columns)
 
     color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
 
@@ -768,7 +768,7 @@ def parallel_categories(
     if dimensions is not None:
         dimensions_list = [s.strip() for s in dimensions.split(",")]
     else:
-        dimensions_list = data.columns
+        dimensions_list = list(data.columns)
 
     color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
 

@@ -1,0 +1,35 @@
+{
+  "name": "plotly_demo_build",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "source": "src/index.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "webpack build",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@linkdlab/funcnodes_react_flow": "^0.1.5",
+    "plotly.js": "^2.32.0",
+    "react-plotly.js": "^2.6.0",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/plotly.js-dist-min": "^2.3.4",
+    "@types/react": "^18.3.2",
+    "chai": "^5.1.1",
+    "mocha": "^10.4.0",
+    "react-scripts": "^5.0.1",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "peerDependencies": {
+    "react": "*", 
+    "react-dom": "*"
+  }
+}

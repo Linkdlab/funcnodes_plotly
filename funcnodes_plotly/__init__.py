@@ -4,6 +4,7 @@ from plotly.basedatatypes import BaseTraceType
 import funcnodes as fn
 from exposedfunctionality.function_parser.types import add_type
 from . import plots, layout, figure, express
+import os
 
 add_type(
     go.Figure,
@@ -48,5 +49,11 @@ NODE_SHELF = fn.Shelf(
     ],
 )
 
+REACT_PLUGIN = {
+    "js": [
+        os.path.join(os.path.dirname(__file__), "react_plugin", "js", "main.js"),
+    ]
+}
 
-__version__ = "0.1.3"
+
+__version__ = "0.1.4"
