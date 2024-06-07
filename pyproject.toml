@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "funcnodes-plotly"
-version = "0.1.4"
+version = "0.1.5"
 description = ""
 authors = ["Julian Kimmig <julian.kimmig@gmx.net>"]
 readme = "README.md"
@@ -9,7 +9,7 @@ repository="https://github.com/JulianKimmig/funcnodes_plotly"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-funcnodes = ">=0.2.16"
+funcnodes = ">=0.2.19"
 plotly = "^5.22.0"
 
 

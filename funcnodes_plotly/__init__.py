@@ -50,10 +50,8 @@ NODE_SHELF = fn.Shelf(
 )
 
 REACT_PLUGIN = {
-    "js": [
-        os.path.join(os.path.dirname(__file__), "react_plugin", "js", "main.js"),
-    ]
+    "module": os.path.join(os.path.dirname(__file__), "react_plugin", "js", "main.js"),
 }
 
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
