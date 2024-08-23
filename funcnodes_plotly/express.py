@@ -932,7 +932,11 @@ def line_ternary(
         {"name": "figure"},
     ],
 )
-def plot_dictionary_data(data_dict: dict, x_key: str) -> go.Figure:
+def plot_dictionary_data(
+    data_dict: dict,
+    x_key: str,
+    mode: Literal["lines", "markers", "lines+markers"] = "lines",
+) -> go.Figure:
     """
     Create a plot from a dictionary where one key is used as the x-axis and the remaining keys are used as separate y-axes.
 
@@ -948,7 +952,7 @@ def plot_dictionary_data(data_dict: dict, x_key: str) -> go.Figure:
         return (
             isinstance(value, np.ndarray)
             and np.issubdtype(value.dtype, np.number)
-            and value.dim < 2
+            and value.ndim < 2
         )
 
         # if isinstance(value, (int, float)):  # Single numerical value
@@ -997,57 +1001,41 @@ def plot_dictionary_data(data_dict: dict, x_key: str) -> go.Figure:
                     name=key,
                     text=values,
                     yaxis=f"y{i+1}",  # Different y-axis for each trace
+                    mode=mode,
                 )
             )
 
     # Style all the traces
     fig.update_traces(
         hoverinfo="name+x+text",
-        line={"width": 1},
-        marker={"size": 8},
-        mode="lines",
         showlegend=True,
     )
+
+    n_axes = len(y_axes)
+    space = 1 / n_axes
 
     # Update layout with axes configurations
     fig.update_layout(
         xaxis=dict(
             autorange=True,
-            range=[x_values[0], x_values[-1]],
-            rangeslider=dict(autorange=True, range=[x_values[0], x_values[-1]]),
             title=x_key,
-            # type="date"
         ),
         **{
             axis: dict(
                 anchor="x",
                 autorange=True,
-                domain=[0.2 * i, 0.2 * (i + 1)],
+                domain=[space * i, space * (i + 1)],
                 linecolor=colors[i % len(colors)],
-                mirror=True,
-                # autorange=True,
-                # range=details['range'],
-                showline=True,
                 side="left",
                 tickfont={"color": colors[i % len(colors)]},
                 title=details["title"],
                 titlefont={"color": colors[i % len(colors)]},
-                type="linear",
                 zeroline=False,
             )
             for i, (axis, details) in enumerate(y_axes.items())
         },
     )
 
-    # Update layout
-    fig.update_layout(
-        dragmode="zoom",
-        hovermode="x",
-        legend=dict(traceorder="reversed"),
-        height=600,
-        template="plotly_white",
-        margin=dict(t=100, b=100),
-    )
     return fig
 
 
