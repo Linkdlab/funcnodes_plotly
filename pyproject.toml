@@ -5,12 +5,13 @@ description = ""
 authors = ["Julian Kimmig <julian.kimmig@gmx.net>"]
 readme = "README.md"
 license = "MIT"
-repository="https://github.com/JulianKimmig/funcnodes_plotly"
+repository = "https://github.com/JulianKimmig/funcnodes_plotly"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-funcnodes = ">=0.2.19"
+python = "^3.11"
+funcnodes = "*"
 plotly = "^5.22.0"
+funcnodes-pandas = "*"
 
 
 [tool.poetry.group.dev.dependencies]
