@@ -8,7 +8,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 
-from .colors import ContinousColorScales
+from .colors import ContinousColorScales, DiscreteColorScales
+import plotly.colors as pc
 
 
 @fn.NodeDecorator(
@@ -256,13 +257,15 @@ def sunburst(
     """
     Create a sunburst chart.
     """
-    return px.sunburst(
+    fig = px.sunburst(
         data,
         names=names,
         values=values,
         parents=parents,
         color=color,
     )
+    fig.update_traces(root_color="lightgrey")
+    return fig
 
 
 @fn.NodeDecorator(
@@ -285,13 +288,15 @@ def treemap(
     Create a treemap.
     """
 
-    return px.treemap(
+    fig = px.treemap(
         data,
         names=names,
         values=values,
         parents=parents,
         color=color,
     )
+    fig.update_traces(root_color="lightgrey")
+    return fig
 
 
 @fn.NodeDecorator(
@@ -313,13 +318,15 @@ def icicle(
     """
     Create an icicle plot.
     """
-    return px.icicle(
+    fig = px.icicle(
         data,
         names=names,
         values=values,
         parents=parents,
         color=color,
     )
+    fig.update_traces(root_color="lightgrey")
+    return fig
 
 
 @fn.NodeDecorator(
@@ -534,8 +541,9 @@ def density_heatmap(
     data: pd.DataFrame,
     x: str,
     y: str,
-    z: str,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    z: Optional[str] = None,
+    histfunc: Optional[Literal["count", "sum", "avg", "min", "max"]] = None,
+    color_continuous_scale: Optional[ContinousColorScales] = None,
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
@@ -543,12 +551,14 @@ def density_heatmap(
     """
     Create a density heatmap.
     """
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_continuous_scale is not None:
+        color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
     return px.density_heatmap(
         data,
         x=x,
         y=y,
         z=z,
+        histfunc=histfunc,
         color_continuous_scale=color_continuous_scale,
         facet_row=facet_row,
         facet_col=facet_col,
@@ -569,7 +579,9 @@ def density_contour(
     data: pd.DataFrame,
     x: str,
     y: str,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    z: Optional[str] = None,
+    histfunc: Optional[Literal["count", "sum", "avg", "min", "max"]] = None,
+    color_discrete_sequence: Optional[DiscreteColorScales] = None,
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
@@ -577,12 +589,15 @@ def density_contour(
     """
     Create a density contour plot.
     """
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_discrete_sequence is not None:
+        color_discrete_sequence = DiscreteColorScales.v(color_discrete_sequence)
     return px.density_contour(
         data,
         x=x,
         y=y,
-        color_discrete_sequence=color_continuous_scale,
+        z=z,
+        histfunc=histfunc,
+        color_discrete_sequence=color_discrete_sequence,
         facet_row=facet_row,
         facet_col=facet_col,
         facet_col_wrap=facet_col_wrap,
@@ -600,7 +615,7 @@ def density_contour(
 )
 def imshow(
     data: np.ndarray,
-    scale: ContinousColorScales = ContinousColorScales.rdbu,
+    scale: Optional[ContinousColorScales] = None,
     scale_midpoint: Optional[float] = None,
     value_text: bool = False,
     x: Optional[np.ndarray] = None,
@@ -609,7 +624,9 @@ def imshow(
     """
     Create an image plot.
     """
-    color_continuous_scale = ContinousColorScales.v(scale)
+    color_continuous_scale = None
+    if scale is not None:
+        color_continuous_scale = ContinousColorScales.v(scale)
     if value_text:
         # show values in scientific notation
         value_text = ".2e"
@@ -726,9 +743,9 @@ def scatter_matrix(
 )
 def parallel_coordinates(
     data: pd.DataFrame,
-    color: str,
+    color: Optional[str] = None,
     dimensions: Optional[str] = None,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    color_continuous_scale: Optional[ContinousColorScales] = None,
     color_continuous_midpoint: Optional[float] = None,
 ) -> go.Figure:
     """
@@ -739,7 +756,8 @@ def parallel_coordinates(
     else:
         dimensions_list = list(data.columns)
 
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_continuous_scale is not None:
+        color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
 
     return px.parallel_coordinates(
         data,
@@ -763,7 +781,7 @@ def parallel_categories(
     data: pd.DataFrame,
     dimensions: Optional[str] = None,
     color: Optional[str] = None,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    color_continuous_scale: Optional[ContinousColorScales] = None,
     color_continuous_midpoint: Optional[float] = None,
 ) -> go.Figure:
     """
@@ -774,7 +792,8 @@ def parallel_categories(
     else:
         dimensions_list = list(data.columns)
 
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_continuous_scale is not None:
+        color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
 
     return px.parallel_categories(
         data,
@@ -853,12 +872,13 @@ def bar_polar(
     r: str,
     theta: str,
     color: Optional[str] = None,
-    color_discrete_sequence: ContinousColorScales = ContinousColorScales.rdbu,
+    color_discrete_sequence: Optional[DiscreteColorScales] = None,
 ) -> go.Figure:
     """
     Create a polar bar plot.
     """
-    color_discrete_sequence = ContinousColorScales.v(color_discrete_sequence)
+    if color_discrete_sequence is not None:
+        color_discrete_sequence = ContinousColorScales.v(color_discrete_sequence)
     return px.bar_polar(
         data,
         r=r,
@@ -926,15 +946,124 @@ def line_ternary(
     )
 
 
-BASIC_SHELF = fn.Shelf(
-    nodes=[
-        scatter,
-        line,
-        bar,
-        area,
-        funnel,
-        timeline,
+@fn.NodeDecorator(
+    "plotly.express.dict_data",
+    name="Dictionary Line Plot",
+    description="Create a stacked line plots from dictionary entries.",
+    default_render_options={"data": {"src": "figure"}},
+    outputs=[
+        {"name": "figure"},
     ],
+)
+def plot_dictionary_data(
+    data_dict: dict,
+    x_key: str,
+    mode: Literal["lines", "markers", "lines+markers"] = "lines",
+) -> go.Figure:
+    """
+    Create a plot from a dictionary where one key is used as the x-axis and the remaining keys are used as separate y-axes.
+
+    Args:
+        data_dict (dict): A dictionary where keys are trace names and values are lists of data points.
+        x_key (str): The key in the dictionary to be used for the x-axis.
+
+    Returns:
+        None
+    """
+
+    def is_plotable(value):
+        return (
+            isinstance(value, np.ndarray)
+            and np.issubdtype(value.dtype, np.number)
+            and value.ndim < 2
+        )
+
+        # if isinstance(value, (int, float)):  # Single numerical value
+        #     return True
+        # elif isinstance(value, list) and all(
+        #     isinstance(i, (int, float)) for i in value
+        # ):  # List of numerical values
+        #     return True
+        # elif isinstance(value, np.ndarray) and np.issubdtype(
+        #     value.dtype, np.number
+        # ):  # Numpy array of numerical values
+        #     return True
+        # return False
+
+    if x_key not in data_dict:
+        raise ValueError(f"The specified x_key '{x_key}' is not in the dictionary.")
+
+    # Extract the x values
+    x_values = data_dict[x_key]
+
+    # Create figure
+    fig = go.Figure()
+
+    # Define colors for y-axes
+    colors = pc.qualitative.Plotly
+
+    # Add traces for each of the remaining keys
+    y_axes = {}
+    for i, (key, values) in enumerate(data_dict.items()):
+        if key == x_key:
+            continue
+        values = np.array(values)
+        if is_plotable(values):
+            y_axes[f"yaxis{i+1}"] = {
+                "title": key,
+                "range": [
+                    min(map(float, values)) - 10,
+                    max(map(float, values)) + 10,
+                ],  # Dynamic range adjustment
+            }
+
+            fig.add_trace(
+                go.Scatter(
+                    x=x_values,
+                    y=values,
+                    name=key,
+                    text=values,
+                    yaxis=f"y{i+1}",  # Different y-axis for each trace
+                    mode=mode,
+                )
+            )
+
+    # Style all the traces
+    fig.update_traces(
+        hoverinfo="name+x+text",
+        showlegend=True,
+    )
+
+    n_axes = len(y_axes)
+    space = 1 / n_axes
+
+    # Update layout with axes configurations
+    fig.update_layout(
+        xaxis=dict(
+            autorange=True,
+            title=x_key,
+        ),
+        **{
+            axis: dict(
+                anchor="x",
+                autorange=True,
+                domain=[space * i, space * (i + 1)],
+                linecolor=colors[i % len(colors)],
+                side="left",
+                tickfont={"color": colors[i % len(colors)]},
+                title=details["title"],
+                titlefont={"color": colors[i % len(colors)]},
+                zeroline=False,
+            )
+            for i, (axis, details) in enumerate(y_axes.items())
+        },
+    )
+
+    return fig
+
+
+BASIC_SHELF = fn.Shelf(
+    nodes=[scatter, line, bar, area, funnel, timeline, plot_dictionary_data],
     name="Basic",
     description="Basic plot types.",
     subshelves=[],

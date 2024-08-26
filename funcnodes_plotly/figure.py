@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import List, Dict, Tuple, Any, Literal, Optional
+from typing import Dict, Tuple, Any, Literal, Optional
 import plotly.graph_objects as go
 from plotly.basedatatypes import BaseTraceType
 import funcnodes as fn
@@ -8,7 +8,7 @@ from .utils import clone_trace, clone_figure
 
 
 @fn.NodeDecorator("plotly.make_figure", name="Make Figure")
-def make_figue() -> go.Figure:
+def make_figure() -> go.Figure:
     """
     Create a simple figure object.
 
@@ -80,7 +80,7 @@ def to_json(figure: go.Figure) -> Dict[str, Any]:
 
 
 NODE_SHELF = fn.Shelf(
-    nodes=[make_figue, add_trace, plot, to_json],
+    nodes=[make_figure, add_trace, plot, to_json],
     name="Figures",
     description="Nodes for creating and manipulating plotly figures.",
     subshelves=[],

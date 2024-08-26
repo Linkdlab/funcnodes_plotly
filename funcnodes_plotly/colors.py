@@ -1,4 +1,5 @@
 import funcnodes as fn
+import plotly.express as px
 
 
 class ContinousColorScales(fn.DataEnum):
@@ -96,3 +97,25 @@ class ContinousColorScales(fn.DataEnum):
     ylgnbu = "ylgnbu"
     ylorbr = "ylorbr"
     ylorrd = "ylorrd"
+
+
+class DiscreteColorScales(fn.DataEnum):
+    set1 = px.colors.qualitative.Set1
+    pastel1 = px.colors.qualitative.Pastel1
+    dark2 = px.colors.qualitative.Dark2
+    set2 = px.colors.qualitative.Set2
+    pastel2 = px.colors.qualitative.Pastel2
+    set3 = px.colors.qualitative.Set3
+    antique = px.colors.qualitative.Antique
+    bold = px.colors.qualitative.Bold
+    pastel = px.colors.qualitative.Pastel
+    prism = px.colors.qualitative.Prism
+    safe = px.colors.qualitative.Safe
+    vivid = px.colors.qualitative.Vivid
+    alphabet = px.colors.qualitative.Alphabet
+    d3 = px.colors.qualitative.D3
+    dark24 = px.colors.qualitative.Dark24
+    g10 = px.colors.qualitative.G10
+    light24 = px.colors.qualitative.Light24
+    plotly = px.colors.qualitative.Plotly
+    t10 = px.colors.qualitative.T10
