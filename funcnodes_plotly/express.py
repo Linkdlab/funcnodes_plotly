@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np
 
-from .colors import ContinousColorScales
+from .colors import ContinousColorScales, DiscreteColorScales
 import plotly.colors as pc
 
 

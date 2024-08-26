@@ -332,6 +332,23 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
             self.assertIsInstance(out, go.Figure)
             plot(out, node.node_id)
 
+    async def test_express_dictionary_data(self):
+        node = fnp.express.plot_dictionary_data()
+
+        node.inputs["data_dict"].value = {
+            "A": [1, 2, 3, 4, 5],
+            "B": [5, 4, 3, 2, 1],
+            "C": [1, 3, 5, 3, 1],
+            "D": [1, 2, 3, 2, 1],
+        }
+
+        node.inputs["x_key"].value = "A"
+
+        await node
+        out = node.get_output("figure").value
+        self.assertIsInstance(out, go.Figure)
+        plot(out, node.node_id)
+
     # plots
 
     async def test_make_scatter_plot(self):
