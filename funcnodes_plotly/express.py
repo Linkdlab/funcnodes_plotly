@@ -603,6 +603,8 @@ def imshow(
     scale: ContinousColorScales = ContinousColorScales.rdbu,
     scale_midpoint: Optional[float] = None,
     value_text: bool = False,
+    x: Optional[np.ndarray] = None,
+    y: Optional[np.ndarray] = None,
 ) -> go.Figure:
     """
     Create an image plot.
@@ -617,6 +619,8 @@ def imshow(
         color_continuous_scale=color_continuous_scale,
         color_continuous_midpoint=scale_midpoint,
         text_auto=value_text,
+        x=x,
+        y=y,
     )
 
 
