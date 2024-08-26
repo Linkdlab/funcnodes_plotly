@@ -257,13 +257,15 @@ def sunburst(
     """
     Create a sunburst chart.
     """
-    return px.sunburst(
+    fig = px.sunburst(
         data,
         names=names,
         values=values,
         parents=parents,
         color=color,
     )
+    fig.update_traces(root_color="lightgrey")
+    return fig
 
 
 @fn.NodeDecorator(
@@ -286,13 +288,15 @@ def treemap(
     Create a treemap.
     """
 
-    return px.treemap(
+    fig = px.treemap(
         data,
         names=names,
         values=values,
         parents=parents,
         color=color,
     )
+    fig.update_traces(root_color="lightgrey")
+    return fig
 
 
 @fn.NodeDecorator(
@@ -314,13 +318,15 @@ def icicle(
     """
     Create an icicle plot.
     """
-    return px.icicle(
+    fig = px.icicle(
         data,
         names=names,
         values=values,
         parents=parents,
         color=color,
     )
+    fig.update_traces(root_color="lightgrey")
+    return fig
 
 
 @fn.NodeDecorator(
@@ -535,8 +541,9 @@ def density_heatmap(
     data: pd.DataFrame,
     x: str,
     y: str,
-    z: str,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    z: Optional[str] = None,
+    histfunc: Optional[Literal["count", "sum", "avg", "min", "max"]] = None,
+    color_continuous_scale: Optional[ContinousColorScales] = None,
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
@@ -544,12 +551,14 @@ def density_heatmap(
     """
     Create a density heatmap.
     """
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_continuous_scale is not None:
+        color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
     return px.density_heatmap(
         data,
         x=x,
         y=y,
         z=z,
+        histfunc=histfunc,
         color_continuous_scale=color_continuous_scale,
         facet_row=facet_row,
         facet_col=facet_col,
@@ -570,7 +579,9 @@ def density_contour(
     data: pd.DataFrame,
     x: str,
     y: str,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    z: Optional[str] = None,
+    histfunc: Optional[Literal["count", "sum", "avg", "min", "max"]] = None,
+    color_discrete_sequence: Optional[DiscreteColorScales] = None,
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
@@ -578,12 +589,15 @@ def density_contour(
     """
     Create a density contour plot.
     """
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_discrete_sequence is not None:
+        color_discrete_sequence = DiscreteColorScales.v(color_discrete_sequence)
     return px.density_contour(
         data,
         x=x,
         y=y,
-        color_discrete_sequence=color_continuous_scale,
+        z=z,
+        histfunc=histfunc,
+        color_discrete_sequence=color_discrete_sequence,
         facet_row=facet_row,
         facet_col=facet_col,
         facet_col_wrap=facet_col_wrap,
@@ -601,14 +615,18 @@ def density_contour(
 )
 def imshow(
     data: np.ndarray,
-    scale: ContinousColorScales = ContinousColorScales.rdbu,
+    scale: Optional[ContinousColorScales] = None,
     scale_midpoint: Optional[float] = None,
     value_text: bool = False,
+    x: Optional[np.ndarray] = None,
+    y: Optional[np.ndarray] = None,
 ) -> go.Figure:
     """
     Create an image plot.
     """
-    color_continuous_scale = ContinousColorScales.v(scale)
+    color_continuous_scale = None
+    if scale is not None:
+        color_continuous_scale = ContinousColorScales.v(scale)
     if value_text:
         # show values in scientific notation
         value_text = ".2e"
@@ -618,6 +636,8 @@ def imshow(
         color_continuous_scale=color_continuous_scale,
         color_continuous_midpoint=scale_midpoint,
         text_auto=value_text,
+        x=x,
+        y=y,
     )
 
 
@@ -723,9 +743,9 @@ def scatter_matrix(
 )
 def parallel_coordinates(
     data: pd.DataFrame,
-    color: str,
+    color: Optional[str] = None,
     dimensions: Optional[str] = None,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    color_continuous_scale: Optional[ContinousColorScales] = None,
     color_continuous_midpoint: Optional[float] = None,
 ) -> go.Figure:
     """
@@ -736,7 +756,8 @@ def parallel_coordinates(
     else:
         dimensions_list = list(data.columns)
 
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_continuous_scale is not None:
+        color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
 
     return px.parallel_coordinates(
         data,
@@ -760,7 +781,7 @@ def parallel_categories(
     data: pd.DataFrame,
     dimensions: Optional[str] = None,
     color: Optional[str] = None,
-    color_continuous_scale: ContinousColorScales = ContinousColorScales.rdbu,
+    color_continuous_scale: Optional[ContinousColorScales] = None,
     color_continuous_midpoint: Optional[float] = None,
 ) -> go.Figure:
     """
@@ -771,7 +792,8 @@ def parallel_categories(
     else:
         dimensions_list = list(data.columns)
 
-    color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
+    if color_continuous_scale is not None:
+        color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
 
     return px.parallel_categories(
         data,
@@ -850,12 +872,13 @@ def bar_polar(
     r: str,
     theta: str,
     color: Optional[str] = None,
-    color_discrete_sequence: ContinousColorScales = ContinousColorScales.rdbu,
+    color_discrete_sequence: Optional[DiscreteColorScales] = None,
 ) -> go.Figure:
     """
     Create a polar bar plot.
     """
-    color_discrete_sequence = ContinousColorScales.v(color_discrete_sequence)
+    if color_discrete_sequence is not None:
+        color_discrete_sequence = ContinousColorScales.v(color_discrete_sequence)
     return px.bar_polar(
         data,
         r=r,

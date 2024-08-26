@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "funcnodes-plotly"
-version = "0.1.6"
+version = "0.1.8"
 description = ""
 authors = ["Julian Kimmig <julian.kimmig@gmx.net>"]
 readme = "README.md"
@@ -10,13 +10,20 @@ repository = "https://github.com/JulianKimmig/funcnodes_plotly"
 [tool.poetry.dependencies]
 python = "^3.11"
 funcnodes = "*"
+funcnodes_pandas = "*"
 plotly = "^5.22.0"
-funcnodes-pandas = "*"
+kaleido = {version = "0.1.0post1", platform = "win32"}
 
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.1.1"
+pytest = "*"
+pre-commit = "*"
+funcnodes-module = "*"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins."funcnodes.module"]
+module = "funcnodes_plotly"
+shelf = "funcnodes_plotly:NODE_SHELF"

@@ -135,6 +135,17 @@ files = [
 pycparser = "*"
 
 [[package]]
+name = "cfgv"
+version = "3.4.0"
+description = "Validate configuration and produce human readable error messages."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "cfgv-3.4.0-py2.py3-none-any.whl", hash = "sha256:b7265b1f29fd3316bfcd2b330d63d024f2bfd8bcb8b0272f8e19a504856c48f9"},
+    {file = "cfgv-3.4.0.tar.gz", hash = "sha256:e52591d4c5f5dead8e0f673fb16db7949d2cfb3f7da4582893288f0ded8fe560"},
+]
+
+[[package]]
 name = "charset-normalizer"
 version = "3.3.2"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
@@ -430,18 +441,18 @@ files = [
 
 [[package]]
 name = "exposedfunctionality"
-version = "0.3.7"
+version = "0.3.8"
 description = "tool to expose functionalities to multiple tools"
 optional = false
-python-versions = "<4.0,>=3.9"
+python-versions = ">=3.9"
 files = [
-    {file = "exposedfunctionality-0.3.7-py3-none-any.whl", hash = "sha256:3186a6898e711f9f4be33383d47aa727148e563abd0a06a9cedef2828d9a252a"},
-    {file = "exposedfunctionality-0.3.7.tar.gz", hash = "sha256:f214041421feb2ff8a2fb6b1b88ac11a4b5ba465743ae9886aa6eb3ae53b57e5"},
+    {file = "exposedfunctionality-0.3.8-py3-none-any.whl", hash = "sha256:84e773c7d2323cef75cfe1fb53d45a041656caf27d5aed7aa4eae95edb7fe078"},
+    {file = "exposedfunctionality-0.3.8.tar.gz", hash = "sha256:44bf803c449c57e04498b209a5f8e6a3873c1a3903a81e1528f6be60bf756356"},
 ]
 
 [package.dependencies]
-pyyaml = ">=6,<7"
-typing-extensions = ">=4.10.0,<5.0.0"
+pyyaml = "*"
+typing-extensions = "*"
 
 [[package]]
 name = "fastjsonschema"
@@ -475,17 +486,17 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "funcnodes"
-version = "0.3.2"
+version = "0.3.3"
 description = "funcnodes"
 optional = false
 python-versions = "<4.0,>=3.11"
 files = [
-    {file = "funcnodes-0.3.2-py3-none-any.whl", hash = "sha256:134af44b4a368924187490fae00fb7dda8667ef89438f717ab6c30a2fa9bb486"},
-    {file = "funcnodes-0.3.2.tar.gz", hash = "sha256:cef81b6f85065e91aee1fc1652630acc0d9e75b6e3774599d349c9129637db6a"},
+    {file = "funcnodes-0.3.3-py3-none-any.whl", hash = "sha256:905ddc9cc6db8bed6c660010f344ef7d77396d76dae1ddae6a5d346052b62e40"},
+    {file = "funcnodes-0.3.3.tar.gz", hash = "sha256:a5ba6ae0f02e1eea1c7dfd86e5d616416e5d75bedcc9901eb06556a61b8eb0bc"},
 ]
 
 [package.dependencies]
-exposedfunctionality = ">=0.3.7"
+exposedfunctionality = ">=0.3.8"
 funcnodes-basic = "*"
 funcnodes-react-flow = ">=0.1.0,<0.2.0"
 networkx = ">=3.3,<4.0"
@@ -498,13 +509,13 @@ websockets = ">=12.0,<13.0"
 
 [[package]]
 name = "funcnodes-basic"
-version = "0.1.4"
+version = "0.1.5"
 description = "Basic functionalities for funcnodes"
 optional = false
 python-versions = "<4.0,>=3.11"
 files = [
-    {file = "funcnodes_basic-0.1.4-py3-none-any.whl", hash = "sha256:8516856bd003a37f792e99201beca14713ff20008653dd8d5966a18239fc6e6a"},
-    {file = "funcnodes_basic-0.1.4.tar.gz", hash = "sha256:ec7d56f5276523d03299c268508c59786fdd1bed5a51c98b4a7f772f32bfb2ae"},
+    {file = "funcnodes_basic-0.1.5-py3-none-any.whl", hash = "sha256:a3453d0c74cad1bdb927de14db57a71cbea5515d4408b2b4383fd71fc8491936"},
+    {file = "funcnodes_basic-0.1.5.tar.gz", hash = "sha256:585dd398b56993b0d3834ea01629df3eb3d88a1dc51c470272490394fc5c39a2"},
 ]
 
 [package.dependencies]
@@ -512,34 +523,45 @@ funcnodes = "*"
 requests = "*"
 
 [[package]]
-name = "funcnodes-numpy"
-version = "0.2.1"
+name = "funcnodes-module"
+version = "0.1.9"
 description = ""
 optional = false
 python-versions = "<4.0,>=3.11"
 files = [
-    {file = "funcnodes_numpy-0.2.1-py3-none-any.whl", hash = "sha256:6c56e20ca621ca485b3787327dfb0d1faddca94ee53f3518911c355194491b9c"},
-    {file = "funcnodes_numpy-0.2.1.tar.gz", hash = "sha256:70c06049f34b61cf3ebac12e4ce0e634f1ed25b680de4339384ae2f1625864ee"},
+    {file = "funcnodes_module-0.1.9-py3-none-any.whl", hash = "sha256:0fd0a02c7bdcf0baab3104ab7f06b535a68c0f2c9515412a3b0bbd6cb292aa4b"},
+    {file = "funcnodes_module-0.1.9.tar.gz", hash = "sha256:176f867108607ca44b5381a7b6c3e9146e7557f61d2b94d86f0943fa849861a3"},
+]
+
+[[package]]
+name = "funcnodes-numpy"
+version = "0.2.2"
+description = ""
+optional = false
+python-versions = "<4.0,>=3.11"
+files = [
+    {file = "funcnodes_numpy-0.2.2-py3-none-any.whl", hash = "sha256:347fe9a53d76d08ae77c8ab792ce749b23ca152d6a733a6a6115fd933daa7fec"},
+    {file = "funcnodes_numpy-0.2.2.tar.gz", hash = "sha256:e0135947d995b0e5f1a626d28752106c469ec55ab967adc4e937354323b659a0"},
+]
+
+[package.dependencies]
+funcnodes = ">=0.3.3"
+numpy = ">=2.0"
+
+[[package]]
+name = "funcnodes-pandas"
+version = "0.1.10"
+description = ""
+optional = false
+python-versions = "<4.0,>=3.11"
+files = [
+    {file = "funcnodes_pandas-0.1.10-py3-none-any.whl", hash = "sha256:9b211ea3f77793fad5507a74ef7a53cf8d63ff479ae7d1b302d90dd0948bf333"},
+    {file = "funcnodes_pandas-0.1.10.tar.gz", hash = "sha256:0d4206f4ec79a12ea465d3b9ad28a1d2f0f93230c915752a0239dcc9e394f808"},
 ]
 
 [package.dependencies]
 funcnodes = "*"
-numpy = ">=2.0,<3.0"
-
-[[package]]
-name = "funcnodes-pandas"
-version = "0.1.9"
-description = ""
-optional = false
-python-versions = "<4.0,>=3.10"
-files = [
-    {file = "funcnodes_pandas-0.1.9-py3-none-any.whl", hash = "sha256:dafb7a6e7cfa92673e6e745939e37cc385ab0274e89a9ed5ba1e9e0c40312466"},
-    {file = "funcnodes_pandas-0.1.9.tar.gz", hash = "sha256:d2d4ec34773fb069470d00faa0b92e9d263a8f7e2964ace27fa42daadeaa8dcf"},
-]
-
-[package.dependencies]
-funcnodes = ">=0.1.42"
-funcnodes-numpy = ">=0.1.5"
+funcnodes-numpy = "*"
 openpyxl = "*"
 pandas = "*"
 
@@ -558,14 +580,28 @@ files = [
 funcnodes = "*"
 
 [[package]]
+name = "identify"
+version = "2.6.0"
+description = "File identification library for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "identify-2.6.0-py2.py3-none-any.whl", hash = "sha256:e79ae4406387a9d300332b5fd366d8994f1525e8414984e1a59e058b2eda2dd0"},
+    {file = "identify-2.6.0.tar.gz", hash = "sha256:cb171c685bdc31bcc4c1734698736a7d5b6c8bf2e0c15117f4d469c8640ae5cf"},
+]
+
+[package.extras]
+license = ["ukkonen"]
+
+[[package]]
 name = "idna"
-version = "3.7"
+version = "3.8"
 description = "Internationalized Domain Names in Applications (IDNA)"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 files = [
-    {file = "idna-3.7-py3-none-any.whl", hash = "sha256:82fee1fc78add43492d3a1898bfa6d8a904cc97d8427f683ed8e798d07761aa0"},
-    {file = "idna-3.7.tar.gz", hash = "sha256:028ff3aadf0609c1fd278d8ea3089299412a7a8b9bd005dd08b9f8285bcb5cfc"},
+    {file = "idna-3.8-py3-none-any.whl", hash = "sha256:050b4e5baadcd44d760cedbd2b8e639f2ff89bbc7a5730fcc662954303377aac"},
+    {file = "idna-3.8.tar.gz", hash = "sha256:d838c2c0ed6fced7693d5e8ab8e734d5f8fda53a039c0164afb0b82e771e3603"},
 ]
 
 [[package]]
@@ -641,6 +677,17 @@ files = [
 [package.extras]
 test = ["async-timeout", "pytest", "pytest-asyncio (>=0.17)", "pytest-trio", "testpath", "trio"]
 trio = ["async_generator", "trio"]
+
+[[package]]
+name = "kaleido"
+version = "0.1.0.post1"
+description = "Static image export for web-based visualization libraries with zero dependencies"
+optional = false
+python-versions = "*"
+files = [
+    {file = "kaleido-0.1.0.post1-py2.py3-none-win32.whl", hash = "sha256:636aedcd89f359f54687b4fe331776a7224f7c31c27d03230e4e13c7cf4cb66a"},
+    {file = "kaleido-0.1.0.post1-py2.py3-none-win_amd64.whl", hash = "sha256:2a942606a13c70dfd0a02e092ec140a1083e093ae06661c5e1b1179e477a9e44"},
+]
 
 [[package]]
 name = "keyring"
@@ -758,6 +805,17 @@ developer = ["changelist (==0.5)", "mypy (>=1.1)", "pre-commit (>=3.2)", "rtoml"
 doc = ["myst-nb (>=1.0)", "numpydoc (>=1.7)", "pillow (>=9.4)", "pydata-sphinx-theme (>=0.14)", "sphinx (>=7)", "sphinx-gallery (>=0.14)", "texext (>=0.6.7)"]
 extra = ["lxml (>=4.6)", "pydot (>=2.0)", "pygraphviz (>=1.12)", "sympy (>=1.10)"]
 test = ["pytest (>=7.2)", "pytest-cov (>=4.0)"]
+
+[[package]]
+name = "nodeenv"
+version = "1.9.1"
+description = "Node.js virtual environment builder"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+files = [
+    {file = "nodeenv-1.9.1-py2.py3-none-any.whl", hash = "sha256:ba11c9782d29c27c70ffbdda2d7415098754709be8a7056d79a737cd901155c9"},
+    {file = "nodeenv-1.9.1.tar.gz", hash = "sha256:6ec12890a2dab7946721edbfbcd91f3319c6ccc9aec47be7c7e6b7011ee6645f"},
+]
 
 [[package]]
 name = "numpy"
@@ -1051,6 +1109,24 @@ files = [
 [package.dependencies]
 poetry = ">=1.8.0,<3.0.0"
 poetry-core = ">=1.7.0,<3.0.0"
+
+[[package]]
+name = "pre-commit"
+version = "3.8.0"
+description = "A framework for managing and maintaining multi-language pre-commit hooks."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "pre_commit-3.8.0-py2.py3-none-any.whl", hash = "sha256:9a90a53bf82fdd8778d58085faf8d83df56e40dfe18f45b19446e26bf1b3a63f"},
+    {file = "pre_commit-3.8.0.tar.gz", hash = "sha256:8bb6494d4a20423842e198980c9ecf9f96607a07ea29549e180eef9ae80fe7af"},
+]
+
+[package.dependencies]
+cfgv = ">=2.0.0"
+identify = ">=1.0.0"
+nodeenv = ">=0.11.1"
+pyyaml = ">=5.1"
+virtualenv = ">=20.10.0"
 
 [[package]]
 name = "ptyprocess"
@@ -1777,4 +1853,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d57263aaece5269bc91cc6c1416cdc1c5e8e9228bafbcd9df25a29d95d8269d9"
+content-hash = "23eab722b53d561ece27229df462f6e00c9805e32254831ff81f6568a14b6bb4"

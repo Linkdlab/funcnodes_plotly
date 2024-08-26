@@ -13,7 +13,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "@linkdlab/funcnodes_react_flow": "^0.1.5",
+    "@linkdlab/funcnodes_react_flow": "^0.2.2-a",
     "plotly.js": "^2.32.0",
     "react-plotly.js": "^2.6.0",
     "typescript": "^5.4.5"
@@ -29,7 +29,8 @@
     "webpack-cli": "^5.1.4"
   },
   "peerDependencies": {
-    "react": "*", 
+    "react": "*",
     "react-dom": "*"
-  }
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }

@@ -6,6 +6,8 @@ from exposedfunctionality.function_parser.types import add_type
 from . import plots, layout, figure, express
 import os
 
+import funcnodes_pandas  # noqa: F401
+
 add_type(
     go.Figure,
     "plotly.Figure",
@@ -54,4 +56,4 @@ REACT_PLUGIN = {
 }
 
 
-__version__ = "0.1.6"
+__version__ = "0.1.7"
