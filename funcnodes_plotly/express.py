@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 
 from .colors import ContinousColorScales, DiscreteColorScales
+import plotly.colors as pc
 
 
 @fn.NodeDecorator(
@@ -945,15 +946,124 @@ def line_ternary(
     )
 
 
-BASIC_SHELF = fn.Shelf(
-    nodes=[
-        scatter,
-        line,
-        bar,
-        area,
-        funnel,
-        timeline,
+@fn.NodeDecorator(
+    "plotly.express.dict_data",
+    name="Dictionary Line Plot",
+    description="Create a stacked line plots from dictionary entries.",
+    default_render_options={"data": {"src": "figure"}},
+    outputs=[
+        {"name": "figure"},
     ],
+)
+def plot_dictionary_data(
+    data_dict: dict,
+    x_key: str,
+    mode: Literal["lines", "markers", "lines+markers"] = "lines",
+) -> go.Figure:
+    """
+    Create a plot from a dictionary where one key is used as the x-axis and the remaining keys are used as separate y-axes.
+
+    Args:
+        data_dict (dict): A dictionary where keys are trace names and values are lists of data points.
+        x_key (str): The key in the dictionary to be used for the x-axis.
+
+    Returns:
+        None
+    """
+
+    def is_plotable(value):
+        return (
+            isinstance(value, np.ndarray)
+            and np.issubdtype(value.dtype, np.number)
+            and value.ndim < 2
+        )
+
+        # if isinstance(value, (int, float)):  # Single numerical value
+        #     return True
+        # elif isinstance(value, list) and all(
+        #     isinstance(i, (int, float)) for i in value
+        # ):  # List of numerical values
+        #     return True
+        # elif isinstance(value, np.ndarray) and np.issubdtype(
+        #     value.dtype, np.number
+        # ):  # Numpy array of numerical values
+        #     return True
+        # return False
+
+    if x_key not in data_dict:
+        raise ValueError(f"The specified x_key '{x_key}' is not in the dictionary.")
+
+    # Extract the x values
+    x_values = data_dict[x_key]
+
+    # Create figure
+    fig = go.Figure()
+
+    # Define colors for y-axes
+    colors = pc.qualitative.Plotly
+
+    # Add traces for each of the remaining keys
+    y_axes = {}
+    for i, (key, values) in enumerate(data_dict.items()):
+        if key == x_key:
+            continue
+        values = np.array(values)
+        if is_plotable(values):
+            y_axes[f"yaxis{i+1}"] = {
+                "title": key,
+                "range": [
+                    min(map(float, values)) - 10,
+                    max(map(float, values)) + 10,
+                ],  # Dynamic range adjustment
+            }
+
+            fig.add_trace(
+                go.Scatter(
+                    x=x_values,
+                    y=values,
+                    name=key,
+                    text=values,
+                    yaxis=f"y{i+1}",  # Different y-axis for each trace
+                    mode=mode,
+                )
+            )
+
+    # Style all the traces
+    fig.update_traces(
+        hoverinfo="name+x+text",
+        showlegend=True,
+    )
+
+    n_axes = len(y_axes)
+    space = 1 / n_axes
+
+    # Update layout with axes configurations
+    fig.update_layout(
+        xaxis=dict(
+            autorange=True,
+            title=x_key,
+        ),
+        **{
+            axis: dict(
+                anchor="x",
+                autorange=True,
+                domain=[space * i, space * (i + 1)],
+                linecolor=colors[i % len(colors)],
+                side="left",
+                tickfont={"color": colors[i % len(colors)]},
+                title=details["title"],
+                titlefont={"color": colors[i % len(colors)]},
+                zeroline=False,
+            )
+            for i, (axis, details) in enumerate(y_axes.items())
+        },
+    )
+
+    return fig
+
+
+BASIC_SHELF = fn.Shelf(
+    nodes=[scatter, line, bar, area, funnel, timeline, plot_dictionary_data],
     name="Basic",
     description="Basic plot types.",
     subshelves=[],
