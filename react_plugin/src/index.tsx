@@ -4,6 +4,7 @@ import {
   IOType,
   RendererPlugin,
   FuncNodesReactPlugin,
+  RenderPluginFactoryProps,
 } from "@linkdlab/funcnodes_react_flow";
 import Plot from "react-plotly.js";
 import plotly from "plotly.js-dist-min";
@@ -206,8 +207,13 @@ const PlotlyRendererPlugin: RendererPlugin = {
   input_renderers: {},
 };
 
+const renderpluginfactory = ({}: RenderPluginFactoryProps) => {
+  return PlotlyRendererPlugin;
+};
+
 const Plugin: FuncNodesReactPlugin = {
   RendererPlugin: PlotlyRendererPlugin,
+  renderpluginfactory: renderpluginfactory,
 };
 
 export default Plugin;
