@@ -15,7 +15,7 @@ funcnodes_images = "*"
 plotly = ">=5"
 kaleido = [
         {version = "0.1.0post1", platform = "win32"},
-        {version = "*", platform = "!=win32"}
+        {version = "0.2.1", platform = "!=win32"}
     ]
 
 
