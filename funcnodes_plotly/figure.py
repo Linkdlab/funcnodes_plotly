@@ -1,5 +1,4 @@
-from copy import deepcopy
-from typing import Dict, Tuple, Any, Literal, Optional
+from typing import Dict, Any, Literal
 import plotly.graph_objects as go
 from plotly.basedatatypes import BaseTraceType
 import funcnodes as fn
