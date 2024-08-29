@@ -1,4 +1,4 @@
-from typing import List, Literal, Optional, Any, Tuple
+from typing import List, Literal, Optional, Any
 import plotly.graph_objects as go
 import funcnodes as fn
 

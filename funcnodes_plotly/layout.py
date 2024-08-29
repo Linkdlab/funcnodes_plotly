@@ -1,4 +1,3 @@
-from typing import List, Optional
 import funcnodes as fn
 from .utils import clone_figure
 import plotly.graph_objects as go
