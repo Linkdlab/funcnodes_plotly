@@ -13,7 +13,11 @@ funcnodes = "*"
 funcnodes_pandas = "*"
 funcnodes_images = "*"
 plotly = ">=5"
-kaleido = {version = "0.1.0post1", platform = "win32"}
+kaleido = [
+        {version = "0.1.0post1", platform = "win32"},
+        {version = "*", platform = "!=win32"}
+    ]
+
 
 
 [tool.poetry.group.dev.dependencies]
