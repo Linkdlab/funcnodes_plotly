@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 import numpy as np
 import os
 import unittest
+import funcnodes_images
 
 PLOT = False
 if PLOT:
@@ -405,7 +406,7 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         self.assertIsInstance(out, go.Figure)
         self.assertEqual(out.layout.title.text, "test")
 
-    # figure
+    # region figure
 
     async def test_make_figure(self):
         node = fnp.figure.make_figure()
@@ -442,6 +443,17 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         out = node.get_output("out").value
 
         self.assertIsInstance(out, dict)
+
+    async def test_to_img(self):
+        node = fnp.figure.to_img()
+
+        node.inputs["figure"].value = go.Figure()
+        await node
+        out = node.get_output("img").value
+
+        self.assertIsInstance(out, funcnodes_images.PillowImageFormat)
+
+    # endregion figure
 
 
 class TestAllNodes(TestAllNodesBase):
