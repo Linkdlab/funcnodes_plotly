@@ -2,6 +2,7 @@ from typing import Tuple, Any
 import plotly.graph_objects as go
 from plotly.basedatatypes import BaseTraceType
 import funcnodes as fn
+
 from exposedfunctionality.function_parser.types import add_type
 from . import plots, layout, figure, express
 import os
@@ -32,8 +33,15 @@ FUNCNODES_RENDER_OPTIONS: fn.RenderOptions = {
 
 def figureencoder(figure: go.Figure, preview: bool = False) -> Tuple[Any, bool]:
     if isinstance(figure, go.Figure):
-        return figure.to_plotly_json(), True
-    return figure, False
+        return fn.Encdata(
+            data=figure.to_plotly_json(),
+            handeled=True,
+            done=True,
+        )
+    return fn.Encdata(
+        data=figure,
+        handeled=False,
+    )
 
 
 fn.JSONEncoder.add_encoder(figureencoder)
@@ -56,4 +64,4 @@ REACT_PLUGIN = {
 }
 
 
-__version__ = "0.1.7"
+__version__ = "0.2.1"
