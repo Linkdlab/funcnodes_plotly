@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "funcnodes-plotly"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Julian Kimmig <julian.kimmig@gmx.net>"]
 readme = "README.md"
@@ -9,14 +9,15 @@ repository = "https://github.com/JulianKimmig/funcnodes_plotly"
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-funcnodes = "*"
-funcnodes_pandas = "*"
+funcnodes = ">=0.4.7"
+funcnodes_pandas = ">=0.2.3"
 funcnodes_images = "*"
 plotly = ">=5"
 kaleido = [
         {version = "0.1.0post1", platform = "win32"},
         {version = "0.2.1", platform = "!=win32"}
     ]
+
 
 
 

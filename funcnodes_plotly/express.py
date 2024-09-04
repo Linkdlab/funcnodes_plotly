@@ -3,6 +3,7 @@ import plotly.express as px
 from typing import Optional, Literal
 
 import funcnodes as fn
+
 import plotly.graph_objects as go
 
 import pandas as pd
@@ -20,6 +21,24 @@ import plotly.colors as pc
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "color",
+                        "size",
+                        "symbol",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def scatter(
     data: pd.DataFrame,
@@ -56,6 +75,22 @@ def scatter(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "color",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def line(
     data: pd.DataFrame,
@@ -88,6 +123,22 @@ def line(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "color",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def bar(
     data: pd.DataFrame,
@@ -120,6 +171,22 @@ def bar(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "color",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def area(
     data: pd.DataFrame,
@@ -152,6 +219,22 @@ def area(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "color",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def funnel(
     data: pd.DataFrame,
@@ -184,6 +267,23 @@ def funnel(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x_start",
+                        "x_end",
+                        "y",
+                        "color",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def timeline(
     data: pd.DataFrame,
@@ -196,7 +296,7 @@ def timeline(
     facet_col_wrap: Optional[int] = None,
 ) -> go.Figure:
     """
-    Create a timeline plot.
+    Create a timeline plot. The x_start and x_end columns should be datetime objects.
     """
     return px.timeline(
         data,
@@ -218,6 +318,20 @@ def timeline(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "names",
+                        "values",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def pie(
     data: pd.DataFrame,
@@ -246,6 +360,21 @@ def pie(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "names",
+                        "values",
+                        "parents",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def sunburst(
     data: pd.DataFrame,
@@ -276,6 +405,21 @@ def sunburst(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "names",
+                        "values",
+                        "parents",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def treemap(
     data: pd.DataFrame,
@@ -307,6 +451,21 @@ def treemap(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "names",
+                        "values",
+                        "parents",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def icicle(
     data: pd.DataFrame,
@@ -337,6 +496,20 @@ def icicle(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "names",
+                        "values",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def funnel_area(
     data: pd.DataFrame,
@@ -363,6 +536,22 @@ def funnel_area(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "color",
+                        "pattern_shape",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def histogram(
     data: pd.DataFrame,
@@ -410,6 +599,22 @@ def histogram(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "color",
+                        "y",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def box(
     data: pd.DataFrame,
@@ -442,6 +647,22 @@ def box(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "color",
+                        "y",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def violin(
     data: pd.DataFrame,
@@ -474,6 +695,22 @@ def violin(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "color",
+                        "y",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def strip(
     data: pd.DataFrame,
@@ -506,6 +743,22 @@ def strip(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "color",
+                        "y",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def ecdf(
     data: pd.DataFrame,
@@ -536,6 +789,22 @@ def ecdf(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "z",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def density_heatmap(
     data: pd.DataFrame,
@@ -574,6 +843,22 @@ def density_heatmap(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "z",
+                        "facet_row",
+                        "facet_col",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def density_contour(
     data: pd.DataFrame,
@@ -649,6 +934,22 @@ def imshow(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "z",
+                        "color",
+                        "symbol",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def scatter_3d(
     data: pd.DataFrame,
@@ -679,6 +980,21 @@ def scatter_3d(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                        "y",
+                        "z",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def line_3d(
     data: pd.DataFrame,
@@ -707,6 +1023,18 @@ def line_3d(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def scatter_matrix(
     data: pd.DataFrame,
@@ -740,6 +1068,18 @@ def scatter_matrix(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def parallel_coordinates(
     data: pd.DataFrame,
@@ -776,6 +1116,18 @@ def parallel_coordinates(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def parallel_categories(
     data: pd.DataFrame,
@@ -812,6 +1164,21 @@ def parallel_categories(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "r",
+                        "theta",
+                        "symbol",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def scatter_polar(
     data: pd.DataFrame,
@@ -840,6 +1207,20 @@ def scatter_polar(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "r",
+                        "theta",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def line_polar(
     data: pd.DataFrame,
@@ -866,6 +1247,20 @@ def line_polar(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "r",
+                        "theta",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def bar_polar(
     data: pd.DataFrame,
@@ -896,6 +1291,22 @@ def bar_polar(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "a",
+                        "b",
+                        "c",
+                        "symbol",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def scatter_ternary(
     data: pd.DataFrame,
@@ -926,6 +1337,21 @@ def scatter_ternary(
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "a",
+                        "b",
+                        "c",
+                        "color",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
 def line_ternary(
     data: pd.DataFrame,
@@ -947,26 +1373,39 @@ def line_ternary(
 
 
 @fn.NodeDecorator(
-    "plotly.express.dict_data",
-    name="Dictionary Line Plot",
-    description="Create a stacked line plots from dictionary entries.",
+    "plotly.express.multidata",
+    name="Plot Multiple Data",
+    description="Create a stacked line plots from entries.",
     default_render_options={"data": {"src": "figure"}},
     outputs=[
         {"name": "figure"},
     ],
+    default_io_options={
+        "data": {
+            "on": {
+                "after_set_value": fn.decorator.update_other_io(
+                    [
+                        "x",
+                    ],
+                    lambda x: list(iter(x)),
+                )
+            }
+        },
+    },
 )
-def plot_dictionary_data(
-    data_dict: dict,
-    x_key: str,
+def plot_multidata(
+    data: pd.DataFrame,
+    x: str,
     mode: Literal["lines", "markers", "lines+markers"] = "lines",
     stack: bool = False,
 ) -> go.Figure:
     """
-    Create a plot from a dictionary where one key is used as the x-axis and the remaining keys are used as separate y-axes.
+    Create a plot from a dictionary where one key is used as the x-axis and the remaining keys are used as
+    separate y-axes.
 
     Args:
-        data_dict (dict): A dictionary where keys are trace names and values are lists of data points.
-        x_key (str): The key in the dictionary to be used for the x-axis.
+        data (dict): A dictionary where keys are trace names and values are lists of data points.
+        x (str): The key in the dictionary to be used for the x-axis.
         mode (str): The mode of the plot. One of 'lines', 'markers', or 'lines+markers'.
         stack (bool): Whether to stack the traces on top of each other. this means that the y-axis will be shared.
 
@@ -981,11 +1420,11 @@ def plot_dictionary_data(
             and value.ndim < 2
         )
 
-    if x_key not in data_dict:
-        raise ValueError(f"The specified x_key '{x_key}' is not in the dictionary.")
+    if x not in data:
+        raise ValueError(f"The specified x '{x}' is not in the dictionary.")
 
     # Extract the x values
-    x_values = data_dict[x_key]
+    x_values = data[x]
 
     # Create figure
     fig = go.Figure()
@@ -996,8 +1435,9 @@ def plot_dictionary_data(
     # Add traces for each of the remaining keys
     if not stack:
         y_axes = {}
-        for i, (key, values) in enumerate(data_dict.items()):
-            if key == x_key:
+        for i, (key) in enumerate(data):
+            values = data[key]
+            if key == x:
                 continue
             values = np.array(values)
             if is_plotable(values):
@@ -1029,7 +1469,7 @@ def plot_dictionary_data(
         fig.update_layout(
             xaxis=dict(
                 autorange=True,
-                title=x_key,
+                title=x,
             ),
             **{
                 axis: dict(
@@ -1048,8 +1488,9 @@ def plot_dictionary_data(
         )
     else:
         n = 0
-        for i, (key, values) in enumerate(data_dict.items()):
-            if key == x_key:
+        for i, key in enumerate(data):
+            values = data[key]
+            if key == x:
                 continue
             values = np.array(values)
             if is_plotable(values):
@@ -1074,7 +1515,7 @@ def plot_dictionary_data(
         fig.update_layout(
             xaxis=dict(
                 autorange=True,
-                title=x_key,
+                title=x,
             ),
             yaxis=dict(
                 autorange=True,
@@ -1086,7 +1527,7 @@ def plot_dictionary_data(
 
 
 BASIC_SHELF = fn.Shelf(
-    nodes=[scatter, line, bar, area, funnel, timeline, plot_dictionary_data],
+    nodes=[scatter, line, bar, area, funnel, timeline, plot_multidata],
     name="Basic",
     description="Basic plot types.",
     subshelves=[],

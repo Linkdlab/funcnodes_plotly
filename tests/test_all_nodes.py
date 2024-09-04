@@ -54,6 +54,9 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
             await node
             out = node.get_output("figure").value
             self.assertIsInstance(out, go.Figure)
+            self.assertEqual(
+                node.inputs["x"].value_options["options"], ["A", "B", "C", "D"]
+            )
             plot(out, node.node_id)
 
     async def test_express_timeline(self):
@@ -332,20 +335,23 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
             plot(out, node.node_id)
 
     async def test_express_dictionary_data(self):
-        node = fnp.express.plot_dictionary_data()
+        node = fnp.express.plot_multidata()
 
-        node.inputs["data_dict"].value = {
+        node.inputs["data"].value = {
             "A": [1, 2, 3, 4, 5],
             "B": [5, 4, 3, 2, 1],
             "C": [1, 3, 5, 3, 1],
             "D": [1, 2, 3, 2, 1],
         }
 
-        node.inputs["x_key"].value = "A"
+        node.inputs["x"].value = "A"
 
         await node
         out = node.get_output("figure").value
         self.assertIsInstance(out, go.Figure)
+        self.assertEqual(
+            node.inputs["x"].value_options["options"], ["A", "B", "C", "D"]
+        )
         plot(out, node.node_id)
 
     # plots
