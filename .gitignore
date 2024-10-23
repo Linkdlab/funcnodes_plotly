@@ -10,3 +10,5 @@ __pycache__/
 dist/
 tests/imaged/
 dev/
+
+/.licensecheck
