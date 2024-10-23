@@ -1,15 +1,21 @@
 [tool.poetry]
 name = "funcnodes-plotly"
-version = "0.2.1"
+version = "0.2.2"
 description = ""
 authors = ["Julian Kimmig <julian.kimmig@gmx.net>"]
 readme = "README.md"
 license = "MIT"
-repository = "https://github.com/JulianKimmig/funcnodes_plotly"
+
+[tool.poetry.urls]
+homepage  = "https://github.com/Linkdlab/funcnodes_plotly"
+source  = "https://github.com/Linkdlab/funcnodes_plotly"
+tracker  = "https://github.com/Linkdlab/funcnodes_plotly/issues"
+download = "https://pypi.org/project/funcnodes-plotly/#files"
+
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-funcnodes = ">=0.4.7"
+funcnodes = "*"
 funcnodes_pandas = ">=0.2.3"
 funcnodes_images = "*"
 plotly = ">=5"
