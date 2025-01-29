@@ -1,41 +1,54 @@
-[tool.poetry]
+[project]
 name = "funcnodes-plotly"
-version = "0.2.3"
+version = "0.2.4"
 description = ""
-authors = ["Julian Kimmig <julian.kimmig@gmx.net>"]
 readme = "README.md"
-license = "MIT"
-
-[tool.poetry.urls]
-homepage  = "https://github.com/Linkdlab/funcnodes_plotly"
-source  = "https://github.com/Linkdlab/funcnodes_plotly"
-tracker  = "https://github.com/Linkdlab/funcnodes_plotly/issues"
-download = "https://pypi.org/project/funcnodes-plotly/#files"
-
-
-[tool.poetry.dependencies]
-python = ">=3.11"
-funcnodes = "*"
-funcnodes_pandas = ">=0.2.3"
-funcnodes_images = "*"
-plotly = ">=5.0.0 <6.0.0"
-kaleido = [
-        {version = "0.1.0post1", platform = "win32"},
-        {version = "0.2.1", platform = "!=win32"}
-    ]
+classifiers = [
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+ "funcnodes",
+ "funcnodes_pandas>=0.2.3",
+ "funcnodes_images",
+ "plotly>=6.0.0",
+ "kaleido==0.1.0post1; sys_platform == 'win32'",
+ "kaleido==0.2.1; sys_platform != 'win32'",
+]
+requires-python = ">=3.11"
+[[project.authors]]
+name = "Julian Kimmig"
+email = "julian.kimmig@gmx.net"
 
 
 
-
-[tool.poetry.group.dev.dependencies]
-pytest = "*"
-pre-commit = "*"
-funcnodes-module = "*"
+[dependency-groups]
+dev = [
+ "pytest",
+ "pre-commit",
+ "funcnodes-module",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = [ "setuptools>=42",]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.plugins."funcnodes.module"]
+[project.license]
+text = "AGPL-3.0"
+
+
+[project.urls]
+homepage = "https://github.com/Linkdlab/funcnodes_plotly"
+source = "https://github.com/Linkdlab/funcnodes_plotly"
+tracker = "https://github.com/Linkdlab/funcnodes_plotly/issues"
+download = "https://pypi.org/project/funcnodes-plotly/#files"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[project.entry-points."funcnodes.module"]
 module = "funcnodes_plotly"
 shelf = "funcnodes_plotly:NODE_SHELF"
+
+[tool.setuptools.packages.find]
+where = [ "src",]
