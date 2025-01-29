@@ -12,3 +12,5 @@ tests/imaged/
 dev/
 
 /.licensecheck
+/.funcnodes
+/src/*.egg-info
