@@ -1,6 +1,6 @@
 [project]
 name = "funcnodes-plotly"
-version = "0.2.4"
+version = "0.2.5"
 description = ""
 readme = "README.md"
 classifiers = [
@@ -10,6 +10,7 @@ classifiers = [
 dependencies = [
  "funcnodes",
  "funcnodes_pandas>=0.2.3",
+ "funcnodes_core>=0.3.44",
  "funcnodes_images",
  "plotly>=6.0.0",
  "kaleido==0.1.0post1; sys_platform == 'win32'",

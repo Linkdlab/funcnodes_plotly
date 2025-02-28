@@ -1,6 +1,8 @@
-from typing import List, Literal, Optional, Any
+from typing import List, Literal, Optional, Any, Tuple
 import plotly.graph_objects as go
 import funcnodes as fn
+
+from funcnodes_plotly.utils import clone_figure, clone_trace
 
 
 class ColorScale(fn.DataEnum):
@@ -36,7 +38,9 @@ class ColorScale(fn.DataEnum):
         "io": {
             "c": {"type": "color"},
         },
+        "data": {"src": "new figure"},
     },
+    outputs=[{"name": "trace"}, {"name": "new figure"}],
 )
 def make_scatter(
     y: List[float],
@@ -45,7 +49,8 @@ def make_scatter(
     name: Optional[str] = None,
     c: Optional[str] = None,
     opacity: float = 1,
-) -> go.Scatter:
+    figure: Optional[go.Figure] = None,
+) -> Tuple[go.Scatter, go.Figure]:
     """
     Create a scatter plot with the given x and y values.
 
@@ -66,6 +71,7 @@ def make_scatter(
     go.Scatter
         The scatter plot object.
     """
+
     d = {
         "x": x,
         "y": y,
@@ -81,7 +87,15 @@ def make_scatter(
             c = "#" + c
         d["marker"]["color"] = c
         d["line"]["color"] = c
-    return go.Scatter(**d)
+
+    trace = go.Scatter(**d)
+    if figure is None:
+        figure = go.Figure()
+    else:
+        figure = clone_figure(figure)
+    figure.add_trace(clone_trace(trace))
+
+    return trace, figure
 
 
 @fn.NodeDecorator(
@@ -94,7 +108,9 @@ def make_scatter(
         "io": {
             "c": {"type": "color"},
         },
+        "data": {"src": "new figure"},
     },
+    outputs=[{"name": "trace"}, {"name": "new figure"}],
 )
 def make_bar(
     y: List[float],
@@ -102,7 +118,8 @@ def make_bar(
     name: Optional[str] = None,
     c: Optional[str] = None,
     opacity: float = 1,
-) -> go.Bar:
+    figure: Optional[go.Figure] = None,
+) -> Tuple[go.Bar, go.Figure]:
     """
     Create a bar plot with the given x and y values.
 
@@ -129,16 +146,31 @@ def make_bar(
         if not c.startswith("#"):
             c = "#" + c
         d["marker"] = {"color": c}
-    return go.Bar(**d)
+    trace = go.Bar(**d)
+    if figure is None:
+        figure = go.Figure()
+    else:
+        figure = clone_figure(figure)
+    figure.add_trace(clone_trace(trace))
+
+    return trace, figure
 
 
-@fn.NodeDecorator("plotly.make_heatmap", name="Make Heatmap Plot")
+@fn.NodeDecorator(
+    "plotly.make_heatmap",
+    name="Make Heatmap Plot",
+    default_render_options={
+        "data": {"src": "new figure"},
+    },
+    outputs=[{"name": "trace"}, {"name": "new figure"}],
+)
 def make_heatmap(
     z: List[List[float]],
     x: Optional[List[Any]] = None,
     y: Optional[List[Any]] = None,
     c: ColorScale = ColorScale.Viridis,
-) -> go.Heatmap:
+    figure: Optional[go.Figure] = None,
+) -> Tuple[go.Heatmap, go.Figure]:
     """
     Create a heatmap plot with the given z values.
 
@@ -158,13 +190,20 @@ def make_heatmap(
     """
     c = ColorScale.v(c)
 
-    return go.Heatmap(
+    trace = go.Heatmap(
         x=x,
         y=y,
         z=z,
         hoverongaps=False,
         colorscale=c,
     )
+    if figure is None:
+        figure = go.Figure()
+    else:
+        figure = clone_figure(figure)
+    figure.add_trace(clone_trace(trace))
+
+    return trace, figure
 
 
 NODE_SHELF = fn.Shelf(

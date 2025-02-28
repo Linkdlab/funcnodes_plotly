@@ -6,6 +6,8 @@ import numpy as np
 import os
 import unittest
 import funcnodes_images
+from funcnodes import NoValue
+from funcnodes_core import testing
 
 PLOT = False
 if PLOT:
@@ -28,7 +30,10 @@ tn = [
 ]
 
 
-class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
+class TestExpressNodes(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        testing.setup()
+
     async def test_express_xy(self):
         df = pd.DataFrame(
             {
@@ -55,7 +60,7 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
             out = node.get_output("figure").value
             self.assertIsInstance(out, go.Figure)
             self.assertEqual(
-                node.inputs["x"].value_options["options"], ["A", "B", "C", "D"]
+                node.inputs["x"].value_options["options"], [NoValue, "A", "B", "C", "D"]
             )
             plot(out, node.node_id)
 
@@ -350,11 +355,14 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         out = node.get_output("figure").value
         self.assertIsInstance(out, go.Figure)
         self.assertEqual(
-            node.inputs["x"].value_options["options"], ["A", "B", "C", "D"]
+            node.inputs["x"].value_options["options"], [NoValue, "A", "B", "C", "D"]
         )
         plot(out, node.node_id)
 
-    # plots
+
+class TestPlotlyNodes(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        testing.setup()
 
     async def test_make_scatter_plot(self):
         node = fnp.plots.make_scatter()
@@ -362,7 +370,7 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         node.inputs["y"].value = [1, 2, 3, 4, 5]
 
         await node
-        out = node.get_output("out").value
+        out = node.get_output("trace").value
 
         self.assertIsInstance(out, go.Scatter)
 
@@ -372,7 +380,7 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         node.inputs["y"].value = [1, 2, 3, 4, 5]
 
         await node
-        out = node.get_output("out").value
+        out = node.get_output("trace").value
 
         self.assertIsInstance(out, go.Bar)
 
@@ -382,7 +390,7 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         node.inputs["z"].value = np.random.rand(10, 10)
 
         await node
-        out = node.get_output("out").value
+        out = node.get_output("trace").value
 
         self.assertIsInstance(out, go.Heatmap)
 
@@ -426,7 +434,7 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
         node.inputs["figure"].value = go.Figure()
         node.inputs["trace"].value = go.Scatter()
         await node
-        out = node.get_output("out").value
+        out = node.get_output("new figure").value
 
         self.assertIsInstance(out, go.Figure)
 
@@ -461,4 +469,4 @@ class ExpressNodeTest(unittest.IsolatedAsyncioTestCase):
 
 
 class TestAllNodes(TestAllNodesBase):
-    sub_test_classes = [ExpressNodeTest]
+    sub_test_classes = [TestExpressNodes, TestPlotlyNodes]
