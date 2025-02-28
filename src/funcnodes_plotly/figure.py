@@ -1,4 +1,4 @@
-from typing import Dict, Any, Literal
+from typing import Dict, Any, Literal, Optional, Union
 import plotly.graph_objects as go
 from plotly.basedatatypes import BaseTraceType
 import funcnodes as fn
@@ -27,8 +27,18 @@ def make_figure() -> go.Figure:
     return go.Figure()
 
 
-@fn.NodeDecorator("plotly.add_trace", name="Add Trace to Figure")
-def add_trace(figure: go.Figure, trace: BaseTraceType) -> go.Figure:
+@fn.NodeDecorator(
+    "plotly.add_trace",
+    name="Add Trace to Figure",
+    default_render_options={
+        "data": {"src": "new figure"},
+    },
+    outputs=[{"name": "new figure"}],
+)
+def add_trace(
+    trace: Union[BaseTraceType | go.Figure],
+    figure: Optional[go.Figure] = None,
+) -> go.Figure:
     """
     Add a trace to a figure object.
 
@@ -45,7 +55,14 @@ def add_trace(figure: go.Figure, trace: BaseTraceType) -> go.Figure:
         The figure object with the added trace.
     """
     # clone the figure object
-    figure = clone_figure(figure)
+
+    if figure is None:
+        figure = go.Figure()
+    else:
+        figure = clone_figure(figure)
+
+    if isinstance(trace, go.Figure):
+        trace = trace.data[0]
     trace = clone_trace(trace)
 
     figure.add_trace(trace)
@@ -89,7 +106,10 @@ def to_json(figure: go.Figure) -> Dict[str, Any]:
     ],
 )
 def to_img(
-    figure: go.Figure, format: Literal["png", "jpeg"] = "png"
+    figure: go.Figure,
+    format: Literal["png", "jpeg"] = "png",
+    width: int = 700,
+    height: int = 500,
 ) -> fn_img.ImageFormat:
     """
     Convert a figure object to an image.
@@ -106,10 +126,15 @@ def to_img(
     fn_img.ImageFormat
         The image format.
     """
-    if format == "jpeg":
-        return fn_img.PillowImageFormat.from_bytes(figure.to_image(format=format))
-    if format == "png":
-        return fn_img.PillowImageFormat.from_bytes(figure.to_image(format=format))
+    base_width = 700
+    scale = width / base_width
+
+    if format in ["jpeg", "png"]:
+        return fn_img.PillowImageFormat.from_bytes(
+            figure.to_image(
+                format=format, scale=scale, width=base_width, height=height // scale
+            )
+        )
     raise ValueError(f"Invalid image format: {format}")
 
 

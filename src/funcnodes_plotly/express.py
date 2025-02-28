@@ -12,6 +12,8 @@ import numpy as np
 from .colors import ContinousColorScales, DiscreteColorScales
 import plotly.colors as pc
 
+from funcnodes import NoValue
+
 
 @fn.NodeDecorator(
     "plotly.express.scatter",
@@ -34,7 +36,7 @@ import plotly.colors as pc
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -54,6 +56,7 @@ def scatter(
     """
     Create a scatter plot.
     """
+
     return px.scatter(
         data,
         x=x,
@@ -86,7 +89,7 @@ def scatter(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -134,7 +137,7 @@ def line(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -182,7 +185,7 @@ def bar(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -230,7 +233,7 @@ def area(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -279,7 +282,7 @@ def funnel(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -327,7 +330,7 @@ def timeline(
                         "values",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -335,8 +338,8 @@ def timeline(
 )
 def pie(
     data: pd.DataFrame,
-    names: str,
-    values: str,
+    names: Optional[str] = None,
+    values: Optional[str] = None,
     color: Optional[str] = None,
     hole: float = 0,
 ) -> go.Figure:
@@ -370,7 +373,7 @@ def pie(
                         "parents",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -415,7 +418,7 @@ def sunburst(
                         "parents",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -461,7 +464,7 @@ def treemap(
                         "parents",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -505,7 +508,7 @@ def icicle(
                         "values",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -547,7 +550,7 @@ def funnel_area(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -610,7 +613,7 @@ def histogram(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -658,7 +661,7 @@ def box(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -706,7 +709,7 @@ def violin(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -754,7 +757,7 @@ def strip(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -800,7 +803,7 @@ def ecdf(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -816,6 +819,8 @@ def density_heatmap(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    nbinsx: Optional[int] = None,
+    nbinsy: Optional[int] = None,
 ) -> go.Figure:
     """
     Create a density heatmap.
@@ -832,6 +837,8 @@ def density_heatmap(
         facet_row=facet_row,
         facet_col=facet_col,
         facet_col_wrap=facet_col_wrap,
+        nbinsx=nbinsx,
+        nbinsy=nbinsy,
     )
 
 
@@ -854,7 +861,7 @@ def density_heatmap(
                         "facet_row",
                         "facet_col",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -945,7 +952,7 @@ def imshow(
                         "color",
                         "symbol",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -990,7 +997,7 @@ def scatter_3d(
                         "z",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1030,7 +1037,7 @@ def line_3d(
                     [
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1075,7 +1082,7 @@ def scatter_matrix(
                     [
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1123,7 +1130,7 @@ def parallel_coordinates(
                     [
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1174,7 +1181,7 @@ def parallel_categories(
                         "symbol",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1216,7 +1223,7 @@ def scatter_polar(
                         "theta",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1256,7 +1263,7 @@ def line_polar(
                         "theta",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1302,7 +1309,7 @@ def bar_polar(
                         "symbol",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1347,7 +1354,7 @@ def scatter_ternary(
                         "c",
                         "color",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
@@ -1387,7 +1394,7 @@ def line_ternary(
                     [
                         "x",
                     ],
-                    lambda x: list(iter(x)),
+                    lambda x: [NoValue] + list(iter(x)),
                 )
             }
         },
