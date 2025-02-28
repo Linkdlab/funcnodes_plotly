@@ -383,7 +383,7 @@ wheels = [
 
 [[package]]
 name = "funcnodes-core"
-version = "0.3.43"
+version = "0.3.44"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dill" },
@@ -392,9 +392,9 @@ dependencies = [
     { name = "setuptools" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/11/15/8758a398cbd63561b2b15d1a0cf4e588a2dfad4cd5eb88dc13ea81118abd/funcnodes_core-0.3.43.tar.gz", hash = "sha256:1fd419c2394d642a5973b08ba2a92e39ce8ceb9cf24620b8b82bd5499d5fb5a4", size = 89483 }
+sdist = { url = "https://files.pythonhosted.org/packages/0e/5f/da70b96dc9f6fe7c3fd1a2416ffd9bd4964cf3c52d093b311991feeedfbb/funcnodes_core-0.3.44.tar.gz", hash = "sha256:8e94a6ce96ba5462385ce9af58dd2169954a99f19319b1bd90f5e55bd1f617de", size = 89488 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dd/8c/71507ab57021371beea6afb920dc1b98541ecece9714983e7e6177c80918/funcnodes_core-0.3.43-py3-none-any.whl", hash = "sha256:fbfb971320350e3ac2b0cc959ac6561afdd1b7d7da4eba96e692718477ad85f2", size = 81633 },
+    { url = "https://files.pythonhosted.org/packages/e0/18/bdd85ab6dd5c335a71e4f65303502b91bdc658d53d1af5dd8dc51405c85c/funcnodes_core-0.3.44-py3-none-any.whl", hash = "sha256:6f37357831aeaa0c622ac291902cda867b8a47ac5bf1e73b4b5a81df787b78e6", size = 81640 },
 ]
 
 [[package]]
@@ -460,6 +460,7 @@ version = "0.2.5"
 source = { editable = "." }
 dependencies = [
     { name = "funcnodes" },
+    { name = "funcnodes-core" },
     { name = "funcnodes-images" },
     { name = "funcnodes-pandas" },
     { name = "kaleido", version = "0.1.0.post1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'win32'" },
@@ -477,6 +478,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "funcnodes" },
+    { name = "funcnodes-core", specifier = ">=0.3.44" },
     { name = "funcnodes-images" },
     { name = "funcnodes-pandas", specifier = ">=0.2.3" },
     { name = "kaleido", marker = "sys_platform != 'win32'", specifier = "==0.2.1" },
