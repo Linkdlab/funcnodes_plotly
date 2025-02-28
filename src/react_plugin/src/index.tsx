@@ -70,7 +70,7 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
     // Memoize replot function to avoid unnecessary re-renders
     const replot = React.useCallback(() => {
       if (!plotRef.current) return;
-      console.log("Rendering plot");
+      // console.log("Rendering plot");
       plotly.react(
         plotRef.current,
         data,
@@ -211,7 +211,7 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
           setImgSrc(cached);
           return;
         }
-        console.log("Rendering image", key.length);
+        // console.log("Rendering image", key.length);
         const plot = await plotly.react(dummyRef.current, data, layout);
         const url = await plotly.toImage(plot, {
           format: "png",
@@ -221,9 +221,12 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
         // destroy plot
         // Purge the dummy plot
         // Cache the generated image
+
         globalPlotlyImageCache.set(key, url);
-        plotly.purge(dummyRef.current);
         setImgSrc(url);
+        try {
+          plotly.purge(dummyRef.current);
+        } catch (e) {}
       }
       render();
     }, [data, layout, width, height]);
