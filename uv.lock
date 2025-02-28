@@ -456,7 +456,7 @@ wheels = [
 
 [[package]]
 name = "funcnodes-plotly"
-version = "0.2.5"
+version = "0.2.6"
 source = { editable = "." }
 dependencies = [
     { name = "funcnodes" },
@@ -464,7 +464,7 @@ dependencies = [
     { name = "funcnodes-images" },
     { name = "funcnodes-pandas" },
     { name = "kaleido", version = "0.1.0.post1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform == 'win32'" },
-    { name = "kaleido", version = "0.2.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'win32'" },
+    { name = "kaleido", version = "0.2.1", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'emscripten' and sys_platform != 'win32'" },
     { name = "plotly" },
 ]
 
@@ -481,7 +481,7 @@ requires-dist = [
     { name = "funcnodes-core", specifier = ">=0.3.44" },
     { name = "funcnodes-images" },
     { name = "funcnodes-pandas", specifier = ">=0.2.3" },
-    { name = "kaleido", marker = "sys_platform != 'win32'", specifier = "==0.2.1" },
+    { name = "kaleido", marker = "sys_platform != 'emscripten' and sys_platform != 'win32'", specifier = "==0.2.1" },
     { name = "kaleido", marker = "sys_platform == 'win32'", specifier = "==0.1.0.post1" },
     { name = "plotly", specifier = ">=6.0.0" },
 ]
@@ -576,8 +576,6 @@ source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
     "python_full_version >= '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
     "python_full_version < '3.12' and sys_platform != 'emscripten' and sys_platform != 'win32'",
-    "python_full_version >= '3.12' and sys_platform == 'emscripten'",
-    "python_full_version < '3.12' and sys_platform == 'emscripten'",
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e0/f7/0ccaa596ec341963adbb4f839774c36d5659e75a0812d946732b927d480e/kaleido-0.2.1-py2.py3-none-macosx_10_11_x86_64.whl", hash = "sha256:ca6f73e7ff00aaebf2843f73f1d3bacde1930ef5041093fe76b83a15785049a7", size = 85153681 },
