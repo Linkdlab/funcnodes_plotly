@@ -1,6 +1,6 @@
 [project]
 name = "funcnodes-plotly"
-version = "0.2.7"
+version = "0.2.8"
 description = ""
 readme = "README.md"
 classifiers = [
