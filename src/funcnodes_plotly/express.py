@@ -52,6 +52,7 @@ def scatter(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a scatter plot.
@@ -59,6 +60,7 @@ def scatter(
 
     return px.scatter(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -103,12 +105,14 @@ def line(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a line plot.
     """
     return px.line(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -151,12 +155,14 @@ def bar(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a bar plot.
     """
     return px.bar(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -199,12 +205,14 @@ def area(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create an area plot.
     """
     return px.area(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -247,12 +255,14 @@ def funnel(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a funnel plot.
     """
     return px.funnel(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -297,12 +307,14 @@ def timeline(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a timeline plot. The x_start and x_end columns should be datetime objects.
     """
     return px.timeline(
         data,
+        title=node.name if node else None,
         x_start=x_start,
         x_end=x_end,
         y=y,
@@ -342,12 +354,14 @@ def pie(
     values: Optional[str] = None,
     color: Optional[str] = None,
     hole: float = 0,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a pie chart.
     """
     return px.pie(
         data,
+        title=node.name if node else None,
         names=names,
         values=values,
         color=color,
@@ -385,12 +399,14 @@ def sunburst(
     values: str,
     parents: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a sunburst chart.
     """
     fig = px.sunburst(
         data,
+        title=node.name if node else None,
         names=names,
         values=values,
         parents=parents,
@@ -430,6 +446,7 @@ def treemap(
     values: str,
     parents: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a treemap.
@@ -437,6 +454,7 @@ def treemap(
 
     fig = px.treemap(
         data,
+        title=node.name if node else None,
         names=names,
         values=values,
         parents=parents,
@@ -476,12 +494,14 @@ def icicle(
     values: str,
     parents: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create an icicle plot.
     """
     fig = px.icicle(
         data,
+        title=node.name if node else None,
         names=names,
         values=values,
         parents=parents,
@@ -519,12 +539,14 @@ def funnel_area(
     names: str,
     values: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a funnel area plot.
     """
     return px.funnel_area(
         data,
+        title=node.name if node else None,
         names=names,
         values=values,
         color=color,
@@ -575,6 +597,7 @@ def histogram(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a histogram.
@@ -583,6 +606,7 @@ def histogram(
         marginal = None
     return px.histogram(
         data,
+        title=node.name if node else None,
         x=x,
         color=color,
         pattern_shape=pattern_shape,
@@ -627,12 +651,14 @@ def box(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a box plot.
     """
     return px.box(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -675,12 +701,14 @@ def violin(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a violin plot.
     """
     return px.violin(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -723,12 +751,14 @@ def strip(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a strip plot.
     """
     return px.strip(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         color=color,
@@ -770,12 +800,14 @@ def ecdf(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create an ECDF plot.
     """
     return px.ecdf(
         data,
+        title=node.name if node else None,
         x=x,
         color=color,
         facet_row=facet_row,
@@ -821,6 +853,7 @@ def density_heatmap(
     facet_col_wrap: Optional[int] = None,
     nbinsx: Optional[int] = None,
     nbinsy: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a density heatmap.
@@ -829,6 +862,7 @@ def density_heatmap(
         color_continuous_scale = ContinousColorScales.v(color_continuous_scale)
     return px.density_heatmap(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         z=z,
@@ -877,6 +911,7 @@ def density_contour(
     facet_row: Optional[str] = None,
     facet_col: Optional[str] = None,
     facet_col_wrap: Optional[int] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a density contour plot.
@@ -885,6 +920,7 @@ def density_contour(
         color_discrete_sequence = DiscreteColorScales.v(color_discrete_sequence)
     return px.density_contour(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         z=z,
@@ -912,6 +948,7 @@ def imshow(
     value_text: bool = False,
     x: Optional[np.ndarray] = None,
     y: Optional[np.ndarray] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create an image plot.
@@ -925,6 +962,7 @@ def imshow(
 
     return px.imshow(
         data,
+        title=node.name if node else None,
         color_continuous_scale=color_continuous_scale,
         color_continuous_midpoint=scale_midpoint,
         text_auto=value_text,
@@ -965,12 +1003,14 @@ def scatter_3d(
     z: str,
     color: Optional[str] = None,
     symbol: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a 3D scatter plot.
     """
     return px.scatter_3d(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         z=z,
@@ -1009,12 +1049,14 @@ def line_3d(
     y: str,
     z: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a 3D line plot.
     """
     return px.line_3d(
         data,
+        title=node.name if node else None,
         x=x,
         y=y,
         z=z,
@@ -1047,6 +1089,7 @@ def scatter_matrix(
     data: pd.DataFrame,
     dimensions: Optional[str] = None,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a scatter matrix.
@@ -1062,6 +1105,7 @@ def scatter_matrix(
 
     return px.scatter_matrix(
         data,
+        title=node.name if node else None,
         dimensions=dimensions_list,
         color=color,
     )
@@ -1094,6 +1138,7 @@ def parallel_coordinates(
     dimensions: Optional[str] = None,
     color_continuous_scale: Optional[ContinousColorScales] = None,
     color_continuous_midpoint: Optional[float] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a parallel coordinates plot.
@@ -1108,6 +1153,7 @@ def parallel_coordinates(
 
     return px.parallel_coordinates(
         data,
+        title=node.name if node else None,
         color=color,
         dimensions=dimensions_list,
         color_continuous_scale=color_continuous_scale,
@@ -1142,6 +1188,7 @@ def parallel_categories(
     color: Optional[str] = None,
     color_continuous_scale: Optional[ContinousColorScales] = None,
     color_continuous_midpoint: Optional[float] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a parallel categories plot.
@@ -1156,6 +1203,7 @@ def parallel_categories(
 
     return px.parallel_categories(
         data,
+        title=node.name if node else None,
         dimensions=dimensions_list,
         color=color,
         color_continuous_scale=color_continuous_scale,
@@ -1193,12 +1241,14 @@ def scatter_polar(
     theta: str,
     color: Optional[str] = None,
     symbol: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a polar scatter plot.
     """
     return px.scatter_polar(
         data,
+        title=node.name if node else None,
         r=r,
         theta=theta,
         color=color,
@@ -1234,12 +1284,14 @@ def line_polar(
     r: str,
     theta: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a polar line plot.
     """
     return px.line_polar(
         data,
+        title=node.name if node else None,
         r=r,
         theta=theta,
         color=color,
@@ -1275,6 +1327,7 @@ def bar_polar(
     theta: str,
     color: Optional[str] = None,
     color_discrete_sequence: Optional[DiscreteColorScales] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a polar bar plot.
@@ -1283,6 +1336,7 @@ def bar_polar(
         color_discrete_sequence = ContinousColorScales.v(color_discrete_sequence)
     return px.bar_polar(
         data,
+        title=node.name if node else None,
         r=r,
         theta=theta,
         color=color,
@@ -1322,12 +1376,14 @@ def scatter_ternary(
     c: str,
     color: Optional[str] = None,
     symbol: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a ternary scatter plot.
     """
     return px.scatter_ternary(
         data,
+        title=node.name if node else None,
         a=a,
         b=b,
         c=c,
@@ -1366,12 +1422,14 @@ def line_ternary(
     b: str,
     c: str,
     color: Optional[str] = None,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a ternary line plot.
     """
     return px.line_ternary(
         data,
+        title=node.name if node else None,
         a=a,
         b=b,
         c=c,
@@ -1405,6 +1463,7 @@ def plot_multidata(
     x: str,
     mode: Literal["lines", "markers", "lines+markers"] = "lines",
     stack: bool = False,
+    node: Optional[fn.Node] = None,
 ) -> go.Figure:
     """
     Create a plot from a dictionary where one key is used as the x-axis and the remaining keys are used as
@@ -1474,6 +1533,7 @@ def plot_multidata(
 
         # Update layout with axes configurations
         fig.update_layout(
+            title=node.name if node else None,
             xaxis=dict(
                 autorange=True,
                 title=x,
