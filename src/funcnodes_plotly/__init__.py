@@ -60,7 +60,8 @@ NODE_SHELF = fn.Shelf(
 )
 
 REACT_PLUGIN = {
-    "module": os.path.join(os.path.dirname(__file__), "react_plugin", "js", "main.js"),
+    "module": os.path.join(os.path.dirname(__file__), "react_plugin", "main.js"),
+    "css": [os.path.join(os.path.dirname(__file__), "react_plugin", "style.css")],
 }
 
 

@@ -1,0 +1,7 @@
+.funcnodes_plotly_container {
+  height: 100%;
+  width: 100%;
+}
+.dialogchildren .funcnodes_plotly_container {
+  min-height: 60vh;
+}
