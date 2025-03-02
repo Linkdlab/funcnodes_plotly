@@ -4,6 +4,7 @@ import {
   RenderPluginFactoryProps,
 } from "@linkdlab/funcnodes_react_flow";
 import plotly from "plotly.js-dist-min";
+import "./style.css";
 
 // Helper to extract the value from IO
 const extractValue = (io: IOType) => io.fullvalue ?? io.value ?? {};
@@ -75,7 +76,11 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
         plotRef.current,
         data,
         { ...layout, autosize: true },
-        { displayModeBar: !staticPlot, staticPlot, responsive: true }
+        {
+          displayModeBar: !staticPlot,
+          staticPlot,
+          responsive: true,
+        }
       );
     }, [data, layout, staticPlot]);
 
@@ -96,7 +101,7 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
     // }, []);
 
     return (
-      <div style={{ width: "100%", height: "100%" }} ref={plotRef}>
+      <div className="funcnodes_plotly_container" ref={plotRef}>
         {" "}
       </div>
     );
