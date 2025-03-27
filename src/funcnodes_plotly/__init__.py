@@ -8,6 +8,7 @@ from . import plots, layout, figure, express
 import os
 
 import funcnodes_pandas  # noqa: F401
+import funcnodes_numpy  # noqa: F401
 
 add_type(
     go.Figure,
@@ -36,7 +37,7 @@ def figureencoder(figure: go.Figure, preview: bool = False) -> Tuple[Any, bool]:
         return fn.Encdata(
             data=figure.to_plotly_json(),
             handeled=True,
-            done=True,
+            done=False,
         )
     return fn.Encdata(
         data=figure,
@@ -65,4 +66,4 @@ REACT_PLUGIN = {
 }
 
 
-__version__ = "0.2.6"
+__version__ = "0.3.0"
