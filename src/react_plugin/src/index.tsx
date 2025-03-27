@@ -1,13 +1,6 @@
-import {
-  IOType,
-  FuncNodesReactPlugin,
-  RenderPluginFactoryProps,
-} from "@linkdlab/funcnodes_react_flow";
+import { v1_types } from "@linkdlab/funcnodes_react_flow";
 import plotly from "plotly.js-dist-min";
 import "./style.css";
-
-// Helper to extract the value from IO
-const extractValue = (io: IOType) => io.fullvalue ?? io.value ?? {};
 
 // Helper to enhance a layout with automatic margins for axes
 const enhanceLayout = (layout: Partial<Plotly.Layout> = {}) => {
@@ -56,7 +49,7 @@ class LRUCache<K, V> {
 // Create a global LRU cache instance
 const globalPlotlyImageCache = new LRUCache<string, string>();
 
-const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
+const renderpluginfactory = ({ React }: v1_types.RenderPluginFactoryProps) => {
   const RenderFigure = ({
     data,
     layout,
@@ -107,11 +100,17 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
     );
   };
 
-  const PlotlyOverlayRenderer = ({ io }: { io: IOType }) => {
-    const value = extractValue(io);
-    const layout = value.layout ?? {};
-    const ref = React.useRef<HTMLDivElement>(null);
+  const PlotlyOverlayRenderer: v1_types.DataOverlayRendererType = ({
+    value,
+    preValue,
+  }: v1_types.DataOverlayRendererProps) => {
+    const usevalue = value ?? preValue;
 
+    const ref = React.useRef<HTMLDivElement>(null);
+    if (usevalue === undefined) {
+      return <div>Plotly figure not found</div>;
+    }
+    const layout = value.layout ?? {};
     // React.useEffect(() => {
     //   if (!ref.current) return;
     //   ref.current.style.minHeight = (ref.current.clientWidth * 2) / 3 + "px";
@@ -245,17 +244,19 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
     );
   };
 
-  const PreviewPlotlyImageRenderer = ({
-    io,
+  const PreviewPlotlyImageRenderer: v1_types.DataViewRendererType = ({
+    value,
+    preValue,
     width = 800,
     height = 800,
-  }: {
-    io: IOType;
+  }: v1_types.DataViewRendererProps & {
     width?: number;
     height?: number;
   }) => {
-    const value = extractValue(io);
-
+    const usevalue = value ?? preValue;
+    if (usevalue === undefined) {
+      return <div>Plotly figure not found</div>;
+    }
     const layout = enhanceLayout(value.layout ?? {});
 
     return (
@@ -268,33 +269,35 @@ const renderpluginfactory = ({ React }: RenderPluginFactoryProps) => {
     );
   };
 
-  const HandlePlotlyRenderer = ({ io }: { io: IOType }) => {
-    return (
-      <div style={{ width: "200px" }}>
-        <PreviewPlotlyImageRenderer io={io} />
-      </div>
-    );
-  };
+  // const HandlePlotlyRenderer: v1_types.DataPreviewViewRendererType = ({
+  //   iostore,
+  // }: v1_types.DataPreviewViewRendererProps) => {
+  //   return (
+  //     <div style={{ width: "200px" }}>
+  //       <PreviewPlotlyImageRenderer iostore={iostore} />
+  //     </div>
+  //   );
+  // };
 
   return {
-    handle_preview_renderers: {
-      "plotly.Figure": HandlePlotlyRenderer,
-    },
+    // handle_preview_renderers: {
+    //   "plotly.Figure": HandlePlotlyRenderer,
+    // },
     data_overlay_renderers: {
       "plotly.Figure": PlotlyOverlayRenderer,
     },
-    data_preview_renderers: {
-      "plotly.Figure": PreviewPlotlyImageRenderer,
-    },
+    // data_preview_renderers: {
+    //   "plotly.Figure": PreviewPlotlyImageRenderer,
+    // },
     data_view_renderers: {
       "plotly.Figure": PreviewPlotlyImageRenderer,
     },
-    input_renderers: {},
   };
 };
 
-const Plugin: FuncNodesReactPlugin = {
+const Plugin: v1_types.FuncNodesReactPlugin = {
   renderpluginfactory: renderpluginfactory,
+  v: 1,
 };
 
 export default Plugin;
