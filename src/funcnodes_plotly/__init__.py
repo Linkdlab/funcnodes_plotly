@@ -6,6 +6,7 @@ import funcnodes as fn
 from exposedfunctionality.function_parser.types import add_type
 from . import plots, layout, figure, express
 import os
+import json
 
 import funcnodes_pandas  # noqa: F401
 import funcnodes_numpy  # noqa: F401
@@ -38,6 +39,7 @@ def figureencoder(figure: go.Figure, preview: bool = False) -> Tuple[Any, bool]:
             data=figure.to_plotly_json(),
             handeled=True,
             done=False,
+            continue_preview=False,
         )
     return fn.Encdata(
         data=figure,
@@ -46,6 +48,27 @@ def figureencoder(figure: go.Figure, preview: bool = False) -> Tuple[Any, bool]:
 
 
 fn.JSONEncoder.add_encoder(figureencoder)
+
+
+def figure_byte_encoder(figure: go.Figure, preview) -> fn.BytesEncdata:
+    if isinstance(figure, go.Figure):
+        return fn.BytesEncdata(
+            data=json.dumps(
+                fn.JSONEncoder.apply_custom_encoding(figure, preview=preview)
+            ).encode("utf-8"),
+            handeled=True,
+            mime="application/json",
+        )
+    return fn.BytesEncdata(
+        data=figure,
+        handeled=False,
+    )
+
+
+fn.ByteEncoder.add_encoder(
+    figure_byte_encoder,
+    enc_cls=[go.Figure],
+)
 
 
 NODE_SHELF = fn.Shelf(
