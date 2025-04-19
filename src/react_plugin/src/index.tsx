@@ -49,7 +49,11 @@ class LRUCache<K, V> {
 // Create a global LRU cache instance
 const globalPlotlyImageCache = new LRUCache<string, string>();
 
-const renderpluginfactory = ({ React }: v1_types.RenderPluginFactoryProps) => {
+const renderpluginfactory = ({
+  React,
+}: // _fnrf_zst,
+// NodeContext,
+v1_types.RenderPluginFactoryProps) => {
   const RenderFigure = ({
     data,
     layout,
