@@ -355,7 +355,7 @@ class TestExpressNodes(unittest.IsolatedAsyncioTestCase):
         out = node.get_output("figure").value
         self.assertIsInstance(out, go.Figure)
         self.assertEqual(
-            node.inputs["x"].value_options["options"], [NoValue, "A", "B", "C", "D"]
+            node.inputs["x"].value_options["options"], ["index", "A", "B", "C", "D"]
         )
         plot(out, node.node_id)
 

@@ -1452,7 +1452,7 @@ def line_ternary(
                     [
                         "x",
                     ],
-                    lambda x: [NoValue] + list(iter(x)),
+                    lambda x: ["index"] + list(iter(x)),
                 )
             }
         },
@@ -1486,11 +1486,17 @@ def plot_multidata(
             and value.ndim < 2
         )
 
-    if x not in data:
-        raise ValueError(f"The specified x '{x}' is not in the dictionary.")
+    if not isinstance(data, pd.DataFrame):
+        data = pd.DataFrame(data)
 
-    # Extract the x values
-    x_values = data[x]
+    if x == "index":
+        x_values = data.index
+    else:
+        if x not in data:
+            raise ValueError(f"The specified x '{x}' is not in the data.")
+
+        # Extract the x values
+        x_values = data[x]
 
     # Create figure
     fig = go.Figure()
