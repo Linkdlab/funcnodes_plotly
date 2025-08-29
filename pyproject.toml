@@ -1,6 +1,6 @@
 [project]
 name = "funcnodes-plotly"
-version = "0.3.2"
+version = "1.0.0"
 description = ""
 readme = "README.md"
 classifiers = [
@@ -31,8 +31,8 @@ dev = [
 ]
 
 [build-system]
-requires = [ "setuptools>=42",]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project.license]
 text = "AGPL-3.0"
@@ -44,8 +44,8 @@ source = "https://github.com/Linkdlab/funcnodes_plotly"
 tracker = "https://github.com/Linkdlab/funcnodes_plotly/issues"
 download = "https://pypi.org/project/funcnodes-plotly/#files"
 
-[tool.setuptools.package-dir]
-"" = "src"
+[tool.hatch.build.targets.wheel]
+packages = ["src/funcnodes_plotly"]
 
 
 [tool.commitizen]
@@ -58,5 +58,3 @@ update_changelog_on_bump = true
 module = "funcnodes_plotly"
 shelf = "funcnodes_plotly:NODE_SHELF"
 
-[tool.setuptools.packages.find]
-where = [ "src",]
