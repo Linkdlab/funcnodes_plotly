@@ -84,9 +84,9 @@ NODE_SHELF = fn.Shelf(
 )
 
 REACT_PLUGIN = {
-    "module": os.path.join(os.path.dirname(__file__), "react_plugin", "main.js"),
-    "css": [os.path.join(os.path.dirname(__file__), "react_plugin", "style.css")],
+    "module": os.path.join(os.path.dirname(__file__), "react_plugin", "index.iife.js"),
+    "css": [os.path.join(os.path.dirname(__file__), "react_plugin", "plugin-custom-renders.css")],
 }
 
 
-__version__ = "0.3.1"
+__version__ = "1.0.0"
