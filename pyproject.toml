@@ -54,6 +54,7 @@ tag_format = "v$version"
 version_scheme = "pep440"
 version_provider = "uv"
 update_changelog_on_bump = true
+
 [project.entry-points."funcnodes.module"]
 module = "funcnodes_plotly"
 shelf = "funcnodes_plotly:NODE_SHELF"
