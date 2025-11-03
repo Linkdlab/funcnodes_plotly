@@ -85,7 +85,14 @@ NODE_SHELF = fn.Shelf(
 
 REACT_PLUGIN = {
     "module": os.path.join(os.path.dirname(__file__), "react_plugin", "index.iife.js"),
-    "css": [os.path.join(os.path.dirname(__file__), "react_plugin", "plugin-custom-renders.css")],
+    "css": [
+        os.path.join(
+            os.path.dirname(__file__), "react_plugin", "plugin-custom-renders.css"
+        )
+    ],
+    "js": [
+        os.path.join(os.path.dirname(__file__), "react_plugin", "plotly-3.1.0.min.js")
+    ],
 }
 
 

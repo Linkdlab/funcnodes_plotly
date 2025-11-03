@@ -36,7 +36,13 @@ export default defineConfig(({ mode }) => ({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@linkdlab/funcnodes_react_flow"],
+      external: [
+        "react",
+        "react-dom",
+        "@linkdlab/funcnodes_react_flow",
+        "react-plotly.js",
+        "plotly.js",
+      ],
       output: {
         globals: {
           react: "React",
