@@ -1,6 +1,6 @@
 [project]
 name = "funcnodes-plotly"
-version = "1.0.0"
+version = "1.1.0"
 description = ""
 readme = "README.md"
 classifiers = [
@@ -28,6 +28,8 @@ dev = [
  "pytest",
  "pre-commit",
  "funcnodes-module",
+ "funcnodes-pandas",
+ "funcnodes-files",
 ]
 
 [build-system]
@@ -58,4 +60,3 @@ update_changelog_on_bump = true
 [project.entry-points."funcnodes.module"]
 module = "funcnodes_plotly"
 shelf = "funcnodes_plotly:NODE_SHELF"
-
