@@ -1,3 +1,15 @@
+## v1.1.1 (2026-01-06)
+
+### Fix
+
+- refine Plotly dependencies for platform compatibility
+- **action**: 🐛 update install command to include --refresh option for uv sync
+
+### Refactor
+
+- **react_plugin**: optimize Plotly rendering with CDN loading
+- **react_plugin**: 🛠️ migrate to Vite and update package structure
+
 ## v0.3.2 (2025-06-06)
 
 ### Fix
