@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.12' and sys_platform == 'emscripten'",
@@ -297,8 +297,8 @@ name = "choreographer"
 version = "1.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "logistro" },
-    { name = "simplejson" },
+    { name = "logistro", marker = "sys_platform != 'emscripten'" },
+    { name = "simplejson", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c0/3a/1188b57af6d96a6dad9418a10d00e20109d3ac64db0545205222b53306ee/choreographer-1.2.0.tar.gz", hash = "sha256:c94eaf6eb3dbc81d68e1476139e69e9e072f4e90fcae1990e5c988d15079d346", size = 45001, upload-time = "2025-10-23T00:32:57.11Z" }
 wheels = [
@@ -607,14 +607,15 @@ wheels = [
 
 [[package]]
 name = "funcnodes-plotly"
-version = "1.1.0"
+version = "1.1.1"
 source = { editable = "." }
 dependencies = [
     { name = "funcnodes" },
     { name = "funcnodes-core" },
     { name = "funcnodes-images" },
     { name = "funcnodes-pandas" },
-    { name = "plotly", extra = ["kaleido"] },
+    { name = "plotly" },
+    { name = "plotly", extra = ["kaleido"], marker = "sys_platform != 'emscripten'" },
 ]
 
 [package.dev-dependencies]
@@ -632,7 +633,8 @@ requires-dist = [
     { name = "funcnodes-core", specifier = ">=0.3.51" },
     { name = "funcnodes-images" },
     { name = "funcnodes-pandas", specifier = ">=0.2.3" },
-    { name = "plotly", extras = ["kaleido"], specifier = ">=6.0.0" },
+    { name = "plotly", marker = "sys_platform == 'emscripten'", specifier = ">=6.0.0" },
+    { name = "plotly", extras = ["kaleido"], marker = "sys_platform != 'emscripten'", specifier = ">=6.0.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -715,11 +717,11 @@ name = "kaleido"
 version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "choreographer" },
-    { name = "logistro" },
-    { name = "orjson" },
-    { name = "packaging" },
-    { name = "pytest-timeout" },
+    { name = "choreographer", marker = "sys_platform != 'emscripten'" },
+    { name = "logistro", marker = "sys_platform != 'emscripten'" },
+    { name = "orjson", marker = "sys_platform != 'emscripten'" },
+    { name = "packaging", marker = "sys_platform != 'emscripten'" },
+    { name = "pytest-timeout", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/49/0c/3624462629aeb9f5bb043583848ce300b4315e8249b393c494c84149b953/kaleido-1.1.0.tar.gz", hash = "sha256:5747703a56d4c034efa69abea4a9c2bfe8ef516ba848e0ec485c65b3b0ab52b6", size = 62044, upload-time = "2025-09-10T19:31:13.925Z" }
 wheels = [
@@ -1292,7 +1294,7 @@ wheels = [
 
 [package.optional-dependencies]
 kaleido = [
-    { name = "kaleido" },
+    { name = "kaleido", marker = "sys_platform != 'emscripten'" },
 ]
 
 [[package]]
@@ -1475,7 +1477,7 @@ name = "pytest-timeout"
 version = "2.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pytest" },
+    { name = "pytest", marker = "sys_platform != 'emscripten'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ac/82/4c9ecabab13363e72d880f2fb504c5f750433b2b6f16e99f4ec21ada284c/pytest_timeout-2.4.0.tar.gz", hash = "sha256:7e68e90b01f9eff71332b25001f85c75495fc4e3a836701876183c4bcfd0540a", size = 17973, upload-time = "2025-05-05T19:44:34.99Z" }
 wheels = [
