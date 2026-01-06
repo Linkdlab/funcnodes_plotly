@@ -3,11 +3,21 @@
 ### Fix
 
 - refine Plotly dependencies for platform compatibility
-- **action**: 🐛 update install command to include --refresh option for uv sync
+
+## v1.1.0 (2025-11-03)
 
 ### Refactor
 
 - **react_plugin**: optimize Plotly rendering with CDN loading
+
+## v1.0.0 (2025-08-29)
+
+### Fix
+
+- **action**: 🐛 update install command to include --refresh option for uv sync
+
+### Refactor
+
 - **react_plugin**: 🛠️ migrate to Vite and update package structure
 
 ## v0.3.2 (2025-06-06)
@@ -49,7 +59,7 @@
 
 - **data**: 🐛 handle index as x value in plot_multidata function
 - update kaleido dependency condition for non-Windows platforms
--  handle potential purge errors
+- handle potential purge errors
 - handle NoValue in plotting functions to ensure proper data representation
 
 ### Refactor
