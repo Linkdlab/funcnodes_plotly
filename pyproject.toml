@@ -12,7 +12,9 @@ dependencies = [
  "funcnodes_pandas>=0.2.3",
  "funcnodes_core>=0.3.51",
  "funcnodes_images",
- "plotly[kaleido]>=6.0.0",
+ "plotly[kaleido]>=6.0.0; sys_platform != 'emscripten'",
+ "plotly>=6.0.0; sys_platform == 'emscripten'",
+
 
 ]
 requires-python = ">=3.11"
