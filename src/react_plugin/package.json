@@ -9,6 +9,7 @@
         "dist"
     ],
     "scripts": {
+        "test": "node --test",
         "build": "tsc && vite build",
         "dev": "vite build --watch",
         "typecheck": "tsc --noEmit"
